@@ -1,0 +1,291 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/mct/contribution-event.schema.json",
+  "title": "MOF Chain Token Contribution Event",
+  "description": "Synthetic schema for non-financial MOF Chain Token contribution events. It is intended for provenance and reputation-credit simulation only, not for financial token issuance.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "schema_version",
+    "contribution_type",
+    "contributor",
+    "research_object",
+    "evidence",
+    "verification",
+    "scoring_inputs",
+    "issued_credential"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "pattern": "^MCT-EVT-[0-9]{4}$",
+      "description": "Local event identifier used only inside the synthetic prototype."
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "0.1.0"
+    },
+    "contribution_type": {
+      "type": "string",
+      "enum": [
+        "mof_dataset_deposition",
+        "negative_synthesis_record",
+        "replication_study",
+        "peer_validation",
+        "sample_sharing",
+        "model_provenance_record",
+        "metadata_curation"
+      ]
+    },
+    "contributor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "display_name",
+        "orcid",
+        "institution"
+      ],
+      "properties": {
+        "display_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "orcid": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{4}-\\d{4}-\\d{3}[0-9X]$",
+          "description": "ORCID iD string in canonical 16-digit display format."
+        },
+        "institution": {
+          "type": "string"
+        }
+      }
+    },
+    "research_object": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "material_id",
+        "title"
+      ],
+      "properties": {
+        "material_id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "doi": {
+          "type": "string",
+          "pattern": "^10\\.[^\\s/]+/.+"
+        },
+        "repository_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "accession_id": {
+          "type": "string"
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "links",
+        "metadata_hash",
+        "license"
+      ],
+      "properties": {
+        "links": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 1
+        },
+        "metadata_hash": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "license": {
+          "type": "string"
+        },
+        "file_hashes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          }
+        }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "timestamp_utc"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "unverified",
+            "automated_metadata_check",
+            "curator_verified",
+            "challenged",
+            "retracted"
+          ]
+        },
+        "verified_by_orcid": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{4}-\\d{4}-\\d{3}[0-9X]$"
+        },
+        "timestamp_utc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "scoring_inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "novelty",
+        "reusability",
+        "reproducibility",
+        "validation_level",
+        "effort_proxy",
+        "negative_result_value",
+        "anti_spam_flag"
+      ],
+      "properties": {
+        "novelty": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "reusability": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "reproducibility": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "validation_level": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "effort_proxy": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "negative_result_value": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "anti_spam_flag": {
+          "type": "boolean"
+        }
+      }
+    },
+    "issued_credential": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "credential_id",
+        "non_transferable",
+        "issued_at_utc",
+        "locked"
+      ],
+      "properties": {
+        "credential_id": {
+          "type": "string",
+          "pattern": "^MCT-CRED-[0-9]{4}$"
+        },
+        "non_transferable": {
+          "type": "boolean",
+          "const": true
+        },
+        "chain_tx_hash": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Null for the synthetic prototype."
+        },
+        "issued_at_utc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "locked": {
+          "type": "boolean",
+          "const": true
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "event_id": "MCT-EVT-0001",
+      "schema_version": "0.1.0",
+      "contribution_type": "mof_dataset_deposition",
+      "contributor": {
+        "display_name": "Example Contributor",
+        "orcid": "0000-0002-1825-0097",
+        "institution": "Example University"
+      },
+      "research_object": {
+        "material_id": "MOF-EXAMPLE-001",
+        "title": "Synthetic MOF dataset deposition example",
+        "doi": "10.0000/example.mof.dataset",
+        "repository_url": "https://example.org/repository/mof-example-001",
+        "accession_id": "EXAMPLE-001"
+      },
+      "evidence": {
+        "links": [
+          "https://example.org/repository/mof-example-001/metadata.json"
+        ],
+        "metadata_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "license": "CC-BY-4.0",
+        "file_hashes": [
+          "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        ]
+      },
+      "verification": {
+        "status": "curator_verified",
+        "verified_by_orcid": "0000-0002-1825-0097",
+        "timestamp_utc": "2026-01-01T00:00:00Z",
+        "notes": "Synthetic example only; no external API call is made."
+      },
+      "scoring_inputs": {
+        "novelty": 0.7,
+        "reusability": 0.9,
+        "reproducibility": 0.8,
+        "validation_level": 0.7,
+        "effort_proxy": 0.6,
+        "negative_result_value": 0.0,
+        "anti_spam_flag": false
+      },
+      "issued_credential": {
+        "credential_id": "MCT-CRED-0001",
+        "non_transferable": true,
+        "chain_tx_hash": null,
+        "issued_at_utc": "2026-01-01T00:00:00Z",
+        "locked": true
+      }
+    }
+  ],
+  "$comment": "Examples are synthetic and included to support reviewer inspection; they do not represent token issuance or a deployed chain."
+}

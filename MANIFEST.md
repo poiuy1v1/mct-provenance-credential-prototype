@@ -1,0 +1,28 @@
+# File manifest
+
+- `.zenodo.json`
+- `CHANGELOG.md`
+- `CITATION.cff`
+- `LICENSE`
+- `README.md`
+- `RELEASE_CHECKLIST.md`
+- `RELEASE_NOTES_v0.3.0-alpha.md`
+- `REPRODUCIBILITY.md`
+- `contribution_schema.json`
+- `data/example_contributions.json`
+- `docs/data-code-availability-final-sentence.md`
+- `docs/manuscript-links.md`
+- `docs/metadata-to-complete-before-release.md`
+- `docs/repository-release-plan.md`
+- `mct_reward_simulation.py`
+- `non_transferable_token_stub.sol`
+- `outputs/help.txt`
+- `outputs/mct_scores.csv`
+- `outputs/reward_sensitivity.csv`
+- `outputs/simulation_dry_run_stdout.json`
+- `outputs/simulation_stdout.json`
+- `outputs/summary.json`
+- `outputs/verification_results.csv`
+- `release_skeleton/README.md`
+- `requirements.txt`
+- `verification_workflow_demo.ipynb`

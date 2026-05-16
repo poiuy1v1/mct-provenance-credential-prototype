@@ -1,0 +1,4 @@
+# Runtime dependencies for Supplementary Software 1 (Paper 1 v207)
+# The Python scripts use only the Python standard library.
+# Tested with Python 3.13.5.
+

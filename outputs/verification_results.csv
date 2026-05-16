@@ -1,0 +1,7 @@
+event_id,contribution_type,has_valid_orcid,has_doi,has_repository_url,has_evidence_link,is_non_transferable,is_locked,checks_passed,workflow_status
+MCT-EVT-0001,mof_dataset_deposition,True,True,True,True,True,True,6,curator_verified_event
+MCT-EVT-0002,negative_synthesis_record,True,True,True,True,True,True,6,metadata_complete_pending_curator
+MCT-EVT-0003,replication_study,True,True,True,True,True,True,6,curator_verified_event
+MCT-EVT-0004,metadata_curation,True,True,True,True,True,True,6,metadata_complete_pending_curator
+MCT-EVT-0005,peer_validation,True,True,True,True,True,True,6,curator_verified_event
+MCT-EVT-0006,metadata_curation,True,True,True,True,True,True,6,metadata_complete_pending_curator

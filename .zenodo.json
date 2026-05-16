@@ -1,0 +1,31 @@
+{
+  "title": "MOF Chain Token provenance credential prototype",
+  "upload_type": "software",
+  "description": "Synthetic, non-financial prototype package accompanying Paper 1. It demonstrates contribution-schema design, non-financial MCT reputation-score simulation, metadata-style verification, and a non-transferable credential stub. It is not a deployed blockchain or financial token system.",
+  "creators": [
+    {
+      "name": "Wei, Jinnan",
+      "affiliation": "Department of Chemistry, University of Cambridge",
+      "orcid": "0009-0006-5356-0441"
+    }
+  ],
+  "access_right": "open",
+  "license": "MIT",
+  "version": "0.3.0-alpha",
+  "keywords": [
+    "MOF",
+    "provenance",
+    "research software",
+    "non-transferable credential",
+    "open science",
+    "supplementary software"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/poiuy1v1/mct-provenance-credential-prototype",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ],
+  "notes": "DOI placeholder before archival: 10.5281/zenodo.TBD. Intended repository URL: https://github.com/poiuy1v1/mct-provenance-credential-prototype. This v212 package is prepared for Codex-assisted finalization, GitHub release creation, and Zenodo archiving. Replace the DOI placeholder only after Zenodo archives the tagged release."
+}
