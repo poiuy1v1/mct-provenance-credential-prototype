@@ -1,4 +1,4 @@
-# Final human metadata status - v212
+# Final human metadata status - v219
 
 Completed:
 
@@ -13,8 +13,8 @@ Completed:
 
 Still pending before journal submission:
 
-- Public GitHub repository creation
-- GitHub release tag `v0.3.0-alpha`
+- Public GitHub repository created
+- GitHub release tag `v0.3.2-alpha` archived
 - Zenodo archiving
 - DOI backfill in manuscript and metadata
 - Final supervisor/co-author status if internal review changes the author list

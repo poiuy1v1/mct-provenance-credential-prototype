@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.org/mct/contribution-event.schema.json",
-  "title": "MOF Chain Token Contribution Event",
-  "description": "Synthetic schema for non-financial MOF Chain Token contribution events. It is intended for provenance and reputation-credit simulation only, not for financial token issuance.",
+  "title": "MCT Provenance Credential Contribution Event",
+  "description": "Synthetic schema for non-financial MCT provenance-credential contribution events. It is intended for provenance and reputation-credit simulation only, not for financial token issuance.",
   "type": "object",
   "additionalProperties": false,
   "required": [

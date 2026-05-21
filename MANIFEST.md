@@ -6,7 +6,7 @@
 - `LICENSE`
 - `README.md`
 - `RELEASE_CHECKLIST.md`
-- `RELEASE_NOTES_v0.3.0-alpha.md`
+- `RELEASE_NOTES_v0.3.2-alpha.md`
 - `REPRODUCIBILITY.md`
 - `contribution_schema.json`
 - `data/example_contributions.json`

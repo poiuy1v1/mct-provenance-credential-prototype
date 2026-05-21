@@ -1,7 +1,7 @@
 {
-  "title": "MOF Chain Token provenance credential prototype",
+  "title": "MCT provenance credential prototype for AI-ready MOF data",
   "upload_type": "software",
-  "description": "Synthetic, non-financial prototype package accompanying Paper 1. It demonstrates contribution-schema design, non-financial MCT reputation-score simulation, metadata-style verification, and a non-transferable credential stub. It is not a deployed blockchain or financial token system.",
+  "description": "Synthetic, non-financial prototype package accompanying Paper 1. This metadata-cleanup release preserves the same prototype logic while using low-risk MCT provenance-credential wording. It demonstrates contribution-schema design, non-financial reputation-score simulation, metadata-style verification, and a non-transferable credential stub. It is not a deployed blockchain, financial token system, cryptocurrency, investment product, or production governance platform.",
   "creators": [
     {
       "name": "Wei, Jinnan",
@@ -11,7 +11,7 @@
   ],
   "access_right": "open",
   "license": "MIT",
-  "version": "0.3.0-alpha",
+  "version": "0.3.2-alpha",
   "keywords": [
     "MOF",
     "provenance",
@@ -27,5 +27,5 @@
       "scheme": "url"
     }
   ],
-  "notes": "DOI placeholder before archival: 10.5281/zenodo.TBD. Intended repository URL: https://github.com/poiuy1v1/mct-provenance-credential-prototype. This v212 package is prepared for Codex-assisted finalization, GitHub release creation, and Zenodo archiving. Replace the DOI placeholder only after Zenodo archives the tagged release."
+  "notes": "Metadata-cleanup GitHub release v0.3.2-alpha. This release preserves the same synthetic research-software prototype as v0.3.1-alpha while aligning the public Zenodo title and metadata with non-financial MCT provenance-credential wording. Prior archived DOI: 10.5281/zenodo.20274154. Repository URL: https://github.com/poiuy1v1/mct-provenance-credential-prototype. Release URL: https://github.com/poiuy1v1/mct-provenance-credential-prototype/releases/tag/v0.3.2-alpha."
 }

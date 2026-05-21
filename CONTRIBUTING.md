@@ -9,4 +9,4 @@ Before making changes:
 3. Keep example data synthetic unless explicit consent, ethics review, and repository policy permit otherwise.
 4. Run `bash scripts/run_smoke_tests.sh` before creating a release.
 
-For manuscript-linked releases, update `CHANGELOG.md`, `RELEASE_NOTES_v0.3.0-alpha.md`, `CITATION.cff`, `.zenodo.json`, and `MANIFEST.md` consistently.
+For manuscript-linked releases, update `CHANGELOG.md`, `RELEASE_NOTES_v0.3.2-alpha.md`, `CITATION.cff`, `.zenodo.json`, and `MANIFEST.md` consistently.

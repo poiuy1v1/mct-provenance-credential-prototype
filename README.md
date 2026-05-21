@@ -1,10 +1,10 @@
-# MOF Chain Token provenance credential prototype
+# MCT provenance credential prototype for AI-ready MOF data
 
 Repository name: `mct-provenance-credential-prototype`  
-Release candidate: `v0.3.0-alpha`  
+Metadata-cleanup release: `v0.3.2-alpha`  
 Manuscript linkage: Paper 1, Supplementary Software 1
 
-This repository contains a minimal, synthetic prototype package for **MOF Chain Token (MCT)** contribution recording and non-financial reputation scoring. It is designed as a reviewable research-software companion to the manuscript *The Virtual Attributes of MOFs: Provenance Credentials and Incentive Design for AI-Ready Materials Science*.
+This repository contains a minimal, synthetic prototype package for **MCT** contribution recording and non-financial reputation scoring. It is designed as a reviewable research-software companion to the manuscript *The Virtual Attributes of MOFs: Provenance Credentials and Incentive Design for AI-Ready Materials Science*.
 
 **Scope:** synthetic research-infrastructure demonstration only.  
 **Not:** a deployed blockchain, production smart contract, ERC-20 token, cryptocurrency, investment product, governance product, or tradable asset.
@@ -32,7 +32,7 @@ mct-provenance-credential-prototype/
 ├── .zenodo.json
 ├── LICENSE
 ├── CHANGELOG.md
-├── RELEASE_NOTES_v0.3.0-alpha.md
+├── RELEASE_NOTES_v0.3.2-alpha.md
 ├── RELEASE_CHECKLIST.md
 └── docs/
     ├── manuscript-links.md
@@ -61,9 +61,9 @@ The Python script uses only the Python standard library.
 
 ## Suggested citation
 
-Until the final DOI is minted, cite the accompanying manuscript and this release candidate:
+Cite the accompanying manuscript and the archived software release as:
 
-> Wei, J. *MOF Chain Token provenance credential prototype*, v0.3.0-alpha, Supplementary Software 1 for *The Virtual Attributes of MOFs: Provenance Credentials and Incentive Design for AI-Ready Materials Science*. DOI: `10.5281/zenodo.TBD` (placeholder to be replaced after Zenodo archiving).
+> Wei, J. *MCT provenance credential prototype for AI-ready MOF data*, v0.3.2-alpha, Supplementary Software 1 for *The Virtual Attributes of MOFs: Provenance Credentials and Incentive Design for AI-Ready Materials Science*. DOI: `10.5281/zenodo.20274154` (archived Zenodo DOI).
 
 ## Scientific interpretation
 
@@ -79,7 +79,7 @@ The notebook and script use synthetic metadata checks only. In a real implementa
 
 ## Release status
 
-This v212 Codex/GitHub release-preparation version is suitable for Codex-assisted repository finalization, local smoke testing, GitHub upload, GitHub release creation, and Zenodo archiving. The DOI placeholder remains until Zenodo archives the tagged release.
+This v0.3.2-alpha package is a metadata-cleanup release. It preserves the same synthetic prototype as v0.3.1-alpha while aligning public GitHub/Zenodo-facing wording with non-financial MCT provenance-credential language. The prior manuscript-linked DOI is listed above; Zenodo will mint/display a new DOI after this tag is published.
 
 ## Release preparation quick commands
 
@@ -89,16 +89,19 @@ Run the local smoke tests before pushing to GitHub:
 bash scripts/run_smoke_tests.sh
 ```
 
-The intended public repository is:
+The public repository is:
 
 ```text
 https://github.com/poiuy1v1/mct-provenance-credential-prototype
 ```
 
-The intended first release tag remains:
+The archived Zenodo-triggered release tag is:
 
 ```text
-v0.3.0-alpha
+v0.3.2-alpha
 ```
 
 Detailed GitHub and Zenodo instructions are provided in `docs/github-release-commands.md` and `docs/zenodo-archive-steps.md`.
+
+
+Metadata-cleanup release URL: `https://github.com/poiuy1v1/mct-provenance-credential-prototype/releases/tag/v0.3.2-alpha`

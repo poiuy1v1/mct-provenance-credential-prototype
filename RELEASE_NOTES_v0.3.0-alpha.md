@@ -1,4 +1,4 @@
-# Release notes - v0.3.0-alpha
+# Release notes - v0.3.2-alpha
 
 This release candidate packages Supplementary Software 1 for Paper 1 as a repository-ready, reviewer-inspectable software artifact.
 
@@ -19,6 +19,6 @@ This release candidate packages Supplementary Software 1 for Paper 1 as a reposi
 - No cryptocurrency, tradable token, token sale, investment product, or market-value logic.
 - No real personal data or authenticated repository/ORCID/DOI API calls.
 
-## DOI placeholder
+## Zenodo DOI
 
-`10.5281/zenodo.TBD` should be replaced after GitHub/Zenodo archiving.
+`10.5281/zenodo.20274154` should be replaced after GitHub/Zenodo archiving.

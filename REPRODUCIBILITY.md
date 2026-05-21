@@ -1,12 +1,12 @@
 # Reproducibility guide - Supplementary Software 1
 
-Release candidate: `v0.3.0-alpha`  
+Archived release: `v0.3.2-alpha`  
 Repository name: `mct-provenance-credential-prototype`  
-DOI placeholder: `10.5281/zenodo.TBD`
+Archived Zenodo DOI: `10.5281/zenodo.20274154`
 
 ## Purpose
 
-This package is a synthetic, reviewer-inspectable prototype for the MOF Chain Token (MCT) manuscript. It demonstrates contribution-event schemas, non-financial reputation-score simulation, metadata-style verification, and non-transferable credential representation.
+This package is a synthetic, reviewer-inspectable prototype for the MCT manuscript. It demonstrates contribution-event schemas, non-financial reputation-score simulation, metadata-style verification, and non-transferable credential representation.
 
 It is **not** a deployed blockchain, production smart contract, cryptocurrency, investment product, tradable token, or governance system.
 
@@ -57,4 +57,4 @@ The package uses synthetic records. Passing the checks does not authenticate an 
 
 ## Archival plan
 
-For journal submission, the final version can be released through a GitHub repository and archived through Zenodo or another persistent repository. Replace `10.5281/zenodo.TBD`, `https://github.com/poiuy1v1/mct-provenance-credential-prototype`, Zenodo DOI metadata before public archiving.
+For journal submission, the final version can be released through a GitHub repository and archived through Zenodo or another persistent repository. After publishing v0.3.2-alpha, replace any version-specific DOI with the new Zenodo version DOI if the journal requires the latest archived record; otherwise cite the already archived DOI `10.5281/zenodo.20274154` as the manuscript-linked software DOI.
