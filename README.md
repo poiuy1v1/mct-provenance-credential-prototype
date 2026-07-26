@@ -1,30 +1,23 @@
 # MOF contribution-credential prototype for AI-ready MOF data
 
-Release candidate: `v0.3.3-alpha`  
-Repository: `https://github.com/poiuy1v1/mct-provenance-credential-prototype`
+Release candidate: `v0.3.3-alpha`
 
-This repository contains a synthetic, non-financial research-software prototype accompanying the Perspective *Provenance and contribution credentials for AI-ready MOF research*. The historical repository name and some file names retain `MCT`, but the manuscript frames the system neutrally as a MOF contribution credential. A blockchain is not required.
+This synthetic, non-financial companion implements a modular contribution-event schema, an inline MOF domain profile, layered validation states, an executable notebook, deterministic validators and diagnostic event scoring. A blockchain is not required.
 
-## v0.3.3-alpha artifact alignment
-
-- adds a hardened MOF research-object JSON Schema;
-- adds a synthetic UiO-66 worked example, evidence hashes, validator and negative tests;
-- replaces a single `verified` state with layered metadata, evidence and scientific-assessment fields;
-- rejects self-verification in executable checks;
-- records source links without falsely claiming that the offline validator resolved them;
-- updates manuscript title, citation metadata and release documentation.
-
-## Quick start
+## Run the complete validation
 
 ```bash
 python3 -m pip install -r requirements.txt
 bash scripts/run_smoke_tests.sh
 ```
 
-## Scope boundary
+The smoke test validates both JSON Schemas, rejects self-verification, checks the worked-example hashes, executes the notebook, regenerates outputs and scans for stale validation vocabulary.
 
-The generated scalar event values are diagnostic software-test outputs only. They are not prices, token balances, researcher rankings, hiring or grant metrics, authorship criteria, or governance entitlements. All records are synthetic.
+## Interpretation boundary
 
-## Archived history
+- `file_integrity_confirmed` means that committed bytes match a recorded SHA-256 hash.
+- `source_link_recorded` means a URL is recorded; it does not mean the URL was resolved.
+- `scientific_assessment.status = not_reviewed` means no domain-expert review is claimed.
+- `diagnostic_event_score` is a synthetic software-test output, not a researcher ranking or allocation metric.
 
-The prior archived release is `v0.3.2-alpha`, DOI `10.5281/zenodo.20324761`. A v0.3.3 DOI should be added only after the GitHub tag is published and Zenodo archives that release.
+The prior archived version is `v0.3.2-alpha`, DOI `10.5281/zenodo.20324761`. Add the v0.3.3 release date and DOI only after GitHub and Zenodo complete publication.
