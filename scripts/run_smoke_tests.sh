@@ -17,8 +17,11 @@ python3 mct_reward_simulation.py --help > outputs/help.txt
 python3 mct_reward_simulation.py --dry-run > outputs/simulation_dry_run_stdout.json
 python3 mct_reward_simulation.py --input data/example_contributions.json --output-dir outputs > outputs/simulation_stdout.json
 jupyter nbconvert --to notebook --execute verification_workflow_demo.ipynb --output verification_workflow_demo_executed.ipynb --output-dir outputs --ExecutePreprocessor.timeout=120 >/dev/null
-for f in diagnostic_event_scores.csv diagnostic_sensitivity.csv summary.json verification_results.csv release_validation.json simulation_dry_run_stdout.json simulation_stdout.json; do
+for f in diagnostic_event_scores.csv diagnostic_sensitivity.csv verification_results.csv; do
   cmp "$TMP/$f" "outputs/$f" || { echo "Regression snapshot mismatch: $f" >&2; exit 1; }
+done
+for f in summary.json release_validation.json simulation_dry_run_stdout.json simulation_stdout.json; do
+  python3 scripts/compare_json_semantics.py "$TMP/$f" "outputs/$f"
 done
 python3 scripts/compare_notebook_semantics.py "$TMP/verification_workflow_demo_executed.ipynb" outputs/verification_workflow_demo_executed.ipynb
 if find . -type d -name '__pycache__' -o -type f -name '*.pyc' | grep -q .; then echo 'Generated Python bytecode detected' >&2; exit 1; fi

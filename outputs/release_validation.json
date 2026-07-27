@@ -8,5 +8,14 @@
   "self_verification_policy": "PASS",
   "packaged_evidence_grounding": "PASS",
   "offline_source_link_policy": "PASS",
-  "synthetic_scientific_boundary": "PASS"
+  "synthetic_scientific_boundary": "PASS",
+  "mof_worked_example": {
+    "schema": "PASS",
+    "identity": "PASS",
+    "conflict": "PASS",
+    "source_link_policy": "PASS",
+    "evidence": "PASS",
+    "hashes": "PASS",
+    "scientific_boundary": "PASS"
+  }
 }
