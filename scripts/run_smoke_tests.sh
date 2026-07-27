@@ -18,7 +18,7 @@ python3 mct_reward_simulation.py --dry-run > outputs/simulation_dry_run_stdout.j
 python3 mct_reward_simulation.py --input data/example_contributions.json --output-dir outputs > outputs/simulation_stdout.json
 jupyter nbconvert --to notebook --execute verification_workflow_demo.ipynb --output verification_workflow_demo_executed.ipynb --output-dir outputs --ExecutePreprocessor.timeout=120 >/dev/null
 for f in diagnostic_event_scores.csv diagnostic_sensitivity.csv verification_results.csv; do
-  cmp "$TMP/$f" "outputs/$f" || { echo "Regression snapshot mismatch: $f" >&2; exit 1; }
+  python3 scripts/compare_csv_semantics.py "$TMP/$f" "outputs/$f"
 done
 for f in summary.json release_validation.json simulation_dry_run_stdout.json simulation_stdout.json; do
   python3 scripts/compare_json_semantics.py "$TMP/$f" "outputs/$f"
