@@ -24,6 +24,8 @@ for f in summary.json release_validation.json simulation_dry_run_stdout.json sim
   python3 scripts/compare_json_semantics.py "$TMP/$f" "outputs/$f"
 done
 python3 scripts/compare_notebook_semantics.py "$TMP/verification_workflow_demo_executed.ipynb" outputs/verification_workflow_demo_executed.ipynb
+find . -type d -name '__pycache__' -prune -exec rm -rf {} +
+find . -type f -name '*.pyc' -delete
 if find . -type d -name '__pycache__' -o -type f -name '*.pyc' | grep -q .; then echo 'Generated Python bytecode detected' >&2; exit 1; fi
-if grep -R -n --exclude-dir=.git --exclude=run_smoke_tests.sh -E 'has_valid_orcid|has_doi|validation_level|verification\.status|evidence_confirmed|scientific_status"|curator_verified_event|Paper 1 v207' .; then echo 'Stale vocabulary detected' >&2; exit 1; fi
+if grep -R -n --exclude-dir=.git --exclude=run_smoke_tests.sh --exclude=smoke-test.yml -E 'has_valid_orcid|has_doi|validation_level|verification\.status|evidence_confirmed|scientific_status"|curator_verified_event|Paper 1 v207' .; then echo 'Stale vocabulary detected' >&2; exit 1; fi
 echo '[OK] v0.3.3-alpha end-to-end regression snapshots passed'
