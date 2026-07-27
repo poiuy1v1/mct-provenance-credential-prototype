@@ -16,3 +16,8 @@ venv/
 # Temporary release artifacts
 *.tmp
 *.bak
+*.pyc
+*.pyo
+*.aux
+*.log
+*.out

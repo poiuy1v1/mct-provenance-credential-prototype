@@ -1,19 +1,13 @@
-name: Smoke test
-
-on:
-  push:
-  pull_request:
-  workflow_dispatch:
-
+name: End-to-end artifact validation
+on: [push, pull_request, workflow_dispatch]
 jobs:
-  smoke-test:
+  validate:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Run smoke tests
-        run: bash scripts/run_smoke_tests.sh
+      - run: python3 -m pip install -r requirements.txt
+      - run: python3 -m ipykernel install --user --name python3 --display-name 'Python 3'
+      - run: bash scripts/run_smoke_tests.sh

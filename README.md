@@ -21,3 +21,7 @@ The smoke test validates both JSON Schemas, rejects self-verification, checks th
 - `diagnostic_event_score` is a synthetic software-test output, not a researcher ranking or allocation metric.
 
 The prior archived version is `v0.3.2-alpha`, DOI `10.5281/zenodo.20324761`. Add the v0.3.3 release date and DOI only after GitHub and Zenodo complete publication.
+
+## Identifier boundary
+
+ORCID-like strings are checked only for canonical format and ISO/IEC 7064 MOD 11-2 checksum. No live ORCID or DOI registry lookup is made.

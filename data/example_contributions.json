@@ -1,68 +1,486 @@
 [
   {
     "event_id": "MCT-EVT-0001",
-    "schema_version": "0.1.0",
+    "schema_version": "0.3.3-alpha",
     "contribution_type": "mof_dataset_deposition",
-    "contributor": {"display_name": "Synthetic Contributor A", "orcid": "0000-0002-1825-0097", "institution": "Example University"},
-    "research_object": {"material_id": "MOF-SYN-001", "title": "Curated UiO-type adsorption dataset", "doi": "10.0000/example.dataset.001", "repository_url": "https://example.org/repository/mof-syn-001", "accession_id": "EXAMPLE-001"},
-    "evidence": {"links": ["https://example.org/repository/mof-syn-001"], "metadata_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "license": "CC-BY-4.0", "file_hashes": ["sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"]},
-    "verification": {"status": "curator_verified", "verified_by_orcid": "0000-0003-1415-9265", "timestamp_utc": "2026-01-01T10:00:00Z", "notes": "Synthetic curator check passed."},
-    "scoring_inputs": {"novelty": 0.70, "reusability": 0.95, "reproducibility": 0.85, "validation_level": 0.90, "effort_proxy": 0.75, "negative_result_value": 0.00, "anti_spam_flag": false},
-    "issued_credential": {"credential_id": "MCT-CRED-0001", "non_transferable": true, "chain_tx_hash": null, "issued_at_utc": "2026-01-01T10:05:00Z", "locked": true}
+    "contributor": {
+      "display_name": "Synthetic Contributor A",
+      "orcid": "0000-0002-1825-0097",
+      "institution": "Example University",
+      "orcid_validation_scope": "format_and_checksum_only"
+    },
+    "research_object": {
+      "material_id": "MOF-SYN-001",
+      "title": "Curated UiO-type adsorption dataset",
+      "doi": "10.0000/example.dataset.001",
+      "repository_url": "https://example.org/repository/mof-syn-001",
+      "accession_id": "EXAMPLE-001",
+      "domain_profile": {
+        "$schema": "mof_research_object_profile.schema.json",
+        "profile_version": "0.3.3-alpha",
+        "synthetic_example": true,
+        "material_identity": {
+          "framework_family": "UiO-66",
+          "display_name": "Synthetic UiO-66 worked example",
+          "structure_identifier": {
+            "identifier_type": "local_synthetic_identifier",
+            "value": "SYN-UIO66-001"
+          }
+        },
+        "sample_identity": {
+          "sample_id": "SYN-SAMPLE-001",
+          "batch_id": "SYN-BATCH-A",
+          "specimen_id": "SYN-SPECIMEN-PXRD-01"
+        },
+        "synthesis_lineage": {
+          "metal_precursor": "zirconium(IV) chloride (illustrative)",
+          "linker": "benzene-1,4-dicarboxylic acid (illustrative)",
+          "modulators": [
+            "hydrochloric acid (illustrative)"
+          ],
+          "solvents": [
+            "N,N-dimethylformamide (illustrative)"
+          ],
+          "reaction_temperature_C": 120,
+          "reaction_duration_h": 24,
+          "workup": [
+            "illustrative solvent washing",
+            "illustrative ambient drying"
+          ],
+          "activation": {
+            "method": "illustrative vacuum activation",
+            "temperature_C": 120,
+            "duration_h": 12
+          }
+        },
+        "characterisation_evidence": [
+          {
+            "technique": "PXRD",
+            "claim": "Illustrative pattern is attached to demonstrate evidence anchoring only; it is not experimental proof of phase identity.",
+            "file": "evidence/example_pxrd_pattern.xy",
+            "sha256": "0532bef01ef15f3db8bfabca04d679e6e0605addae4724e14bec57bb3b13d5c2",
+            "file_status": "evidence_file_present",
+            "integrity_status": "file_integrity_confirmed",
+            "source_link_status": "source_link_recorded"
+          },
+          {
+            "technique": "synthesis_log",
+            "claim": "Illustrative synthesis metadata are recorded in a separate text file.",
+            "file": "evidence/example_synthesis_log.txt",
+            "sha256": "d8fd35a9f01a608223f62ff01b721ce426b335f26629890683464d3fa57bc801",
+            "file_status": "evidence_file_present",
+            "integrity_status": "file_integrity_confirmed",
+            "source_link_status": "source_link_recorded"
+          }
+        ],
+        "source_anchoring": {
+          "repository_url": "https://github.com/poiuy1v1/mct-provenance-credential-prototype/tree/release/v0.3.3-alpha-artifact-alignment/MOF_WorkedExample",
+          "record_locator": "MOF_WorkedExample/synthetic_uio66_research_object.json",
+          "license": "CC0-1.0 synthetic metadata example",
+          "created_utc": "2026-07-13T12:00:00Z"
+        },
+        "validation": {
+          "metadata_status": "metadata_validated",
+          "contributor_id": "did:example:contributor-001",
+          "verifier_id": "did:example:verifier-001",
+          "independent_verifier": true,
+          "decision_date": "2026-07-13",
+          "decision_notes": "Contributor and verifier identifiers are distinct. File presence and SHA-256 integrity are checked. The repository link is recorded but not network-resolved by the deterministic offline validator; scientific review is not claimed.",
+          "credential_status": "draft",
+          "evidence_file_status": "evidence_file_present",
+          "file_integrity_status": "file_integrity_confirmed",
+          "source_link_status": "source_link_recorded",
+          "scientific_assessment": {
+            "status": "not_reviewed",
+            "notes": "No domain-expert scientific review is claimed for this synthetic example."
+          },
+          "conflict_declaration": {
+            "declared": false,
+            "details": "No known conflict is declared for this synthetic example."
+          }
+        },
+        "reported_outcome": {
+          "state": "reported_success",
+          "source": "synthetic_synthesis_record",
+          "description": "Synthetic reported-outcome label used only to demonstrate a machine-readable field; no experimental result or scientific assessment is claimed."
+        }
+      }
+    },
+    "evidence": {
+      "links": [
+        "https://example.org/repository/mof-syn-001"
+      ],
+      "metadata_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "license": "CC-BY-4.0",
+      "files": [
+        {
+          "path": "MOF_WorkedExample/evidence/example_pxrd_pattern.xy",
+          "sha256": "0532bef01ef15f3db8bfabca04d679e6e0605addae4724e14bec57bb3b13d5c2"
+        },
+        {
+          "path": "MOF_WorkedExample/evidence/example_synthesis_log.txt",
+          "sha256": "d8fd35a9f01a608223f62ff01b721ce426b335f26629890683464d3fa57bc801"
+        }
+      ]
+    },
+    "scoring_inputs": {
+      "novelty": 0.7,
+      "reusability": 0.95,
+      "reproducibility": 0.85,
+      "effort_proxy": 0.75,
+      "negative_result_value": 0.0,
+      "anti_spam_flag": false
+    },
+    "issued_credential": {
+      "credential_id": "MCT-CRED-0001",
+      "non_transferable": true,
+      "chain_tx_hash": null,
+      "issued_at_utc": "2026-01-01T10:05:00Z",
+      "locked": true,
+      "registry_backend": "repository_database",
+      "registry_record_id": null
+    },
+    "validation": {
+      "metadata_status": "metadata_validated",
+      "evidence_file_status": "evidence_file_present",
+      "file_integrity_status": "file_integrity_confirmed",
+      "source_link_status": "source_link_recorded",
+      "scientific_assessment": {
+        "status": "not_reviewed",
+        "notes": "Synthetic record; no domain-expert scientific assessment is claimed."
+      },
+      "verifier": {
+        "type": "person",
+        "identifier": "0000-0003-1415-9269",
+        "display_name": "Synthetic independent verifier",
+        "identifier_scheme": "orcid_format_only"
+      },
+      "timestamp_utc": "2026-01-01T10:00:00Z",
+      "conflict_declaration": {
+        "declared": false,
+        "details": "No known conflict is declared for this synthetic event."
+      },
+      "notes": "Synthetic curator check passed. Scientific review is not claimed."
+    }
   },
   {
     "event_id": "MCT-EVT-0002",
-    "schema_version": "0.1.0",
+    "schema_version": "0.3.3-alpha",
     "contribution_type": "negative_synthesis_record",
-    "contributor": {"display_name": "Synthetic Contributor B", "orcid": "0000-0001-5000-0007", "institution": "Example Institute"},
-    "research_object": {"material_id": "MOF-SYN-002", "title": "Failed solvothermal synthesis of Zr framework under water-rich conditions", "doi": "10.0000/example.negative.002", "repository_url": "https://example.org/repository/mof-syn-002", "accession_id": "EXAMPLE-002"},
-    "evidence": {"links": ["https://example.org/repository/mof-syn-002"], "metadata_hash": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc", "license": "CC0-1.0", "file_hashes": ["sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"]},
-    "verification": {"status": "automated_metadata_check", "timestamp_utc": "2026-01-04T12:00:00Z", "notes": "Synthetic metadata fields present; curator check pending."},
-    "scoring_inputs": {"novelty": 0.45, "reusability": 0.80, "reproducibility": 0.70, "validation_level": 0.55, "effort_proxy": 0.60, "negative_result_value": 0.95, "anti_spam_flag": false},
-    "issued_credential": {"credential_id": "MCT-CRED-0002", "non_transferable": true, "chain_tx_hash": null, "issued_at_utc": "2026-01-04T12:10:00Z", "locked": true}
+    "contributor": {
+      "display_name": "Synthetic Contributor B",
+      "orcid": "0000-0001-5000-0007",
+      "institution": "Example Institute",
+      "orcid_validation_scope": "format_and_checksum_only"
+    },
+    "research_object": {
+      "material_id": "MOF-SYN-002",
+      "title": "Failed solvothermal synthesis of Zr framework under water-rich conditions",
+      "doi": "10.0000/example.negative.002",
+      "repository_url": "https://example.org/repository/mof-syn-002",
+      "accession_id": "EXAMPLE-002"
+    },
+    "evidence": {
+      "links": [
+        "https://example.org/repository/mof-syn-002"
+      ],
+      "metadata_hash": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "license": "CC0-1.0"
+    },
+    "scoring_inputs": {
+      "novelty": 0.45,
+      "reusability": 0.8,
+      "reproducibility": 0.7,
+      "effort_proxy": 0.6,
+      "negative_result_value": 0.95,
+      "anti_spam_flag": false
+    },
+    "issued_credential": {
+      "credential_id": "MCT-CRED-0002",
+      "non_transferable": true,
+      "chain_tx_hash": null,
+      "issued_at_utc": "2026-01-04T12:10:00Z",
+      "locked": true,
+      "registry_backend": "repository_database",
+      "registry_record_id": null
+    },
+    "validation": {
+      "metadata_status": "metadata_validated",
+      "evidence_file_status": "not_checked",
+      "file_integrity_status": "not_checked",
+      "source_link_status": "source_link_recorded",
+      "scientific_assessment": {
+        "status": "not_reviewed",
+        "notes": "Synthetic record; no domain-expert scientific assessment is claimed."
+      },
+      "verifier": {
+        "type": "system",
+        "identifier": "system:synthetic-metadata-checker-v0.3.3",
+        "display_name": "Synthetic metadata checker",
+        "identifier_scheme": "system_identifier"
+      },
+      "timestamp_utc": "2026-01-04T12:00:00Z",
+      "conflict_declaration": {
+        "declared": false,
+        "details": "No known conflict is declared for this synthetic event."
+      },
+      "notes": "Synthetic metadata fields present; curator check pending. Scientific review is not claimed."
+    }
   },
   {
     "event_id": "MCT-EVT-0003",
-    "schema_version": "0.1.0",
+    "schema_version": "0.3.3-alpha",
     "contribution_type": "replication_study",
-    "contributor": {"display_name": "Synthetic Contributor C", "orcid": "0000-0002-0000-0002", "institution": "Example Lab"},
-    "research_object": {"material_id": "MOF-SYN-001", "title": "Independent replication of UiO-type adsorption dataset", "doi": "10.0000/example.replication.003", "repository_url": "https://example.org/repository/mof-syn-003", "accession_id": "EXAMPLE-003"},
-    "evidence": {"links": ["https://example.org/repository/mof-syn-003"], "metadata_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", "license": "CC-BY-4.0", "file_hashes": ["sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"]},
-    "verification": {"status": "curator_verified", "verified_by_orcid": "0000-0003-1415-9265", "timestamp_utc": "2026-01-10T09:30:00Z", "notes": "Synthetic replication report contains raw data and protocol details."},
-    "scoring_inputs": {"novelty": 0.35, "reusability": 0.90, "reproducibility": 0.98, "validation_level": 1.00, "effort_proxy": 0.85, "negative_result_value": 0.00, "anti_spam_flag": false},
-    "issued_credential": {"credential_id": "MCT-CRED-0003", "non_transferable": true, "chain_tx_hash": null, "issued_at_utc": "2026-01-10T09:35:00Z", "locked": true}
+    "contributor": {
+      "display_name": "Synthetic Contributor C",
+      "orcid": "0000-0002-0000-0006",
+      "institution": "Example Lab",
+      "orcid_validation_scope": "format_and_checksum_only"
+    },
+    "research_object": {
+      "material_id": "MOF-SYN-001",
+      "title": "Independent replication of UiO-type adsorption dataset",
+      "doi": "10.0000/example.replication.003",
+      "repository_url": "https://example.org/repository/mof-syn-003",
+      "accession_id": "EXAMPLE-003"
+    },
+    "evidence": {
+      "links": [
+        "https://example.org/repository/mof-syn-003"
+      ],
+      "metadata_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "license": "CC-BY-4.0"
+    },
+    "scoring_inputs": {
+      "novelty": 0.35,
+      "reusability": 0.9,
+      "reproducibility": 0.98,
+      "effort_proxy": 0.85,
+      "negative_result_value": 0.0,
+      "anti_spam_flag": false
+    },
+    "issued_credential": {
+      "credential_id": "MCT-CRED-0003",
+      "non_transferable": true,
+      "chain_tx_hash": null,
+      "issued_at_utc": "2026-01-10T09:35:00Z",
+      "locked": true,
+      "registry_backend": "repository_database",
+      "registry_record_id": null
+    },
+    "validation": {
+      "metadata_status": "metadata_validated",
+      "evidence_file_status": "not_checked",
+      "file_integrity_status": "not_checked",
+      "source_link_status": "source_link_recorded",
+      "scientific_assessment": {
+        "status": "not_reviewed",
+        "notes": "Synthetic record; no domain-expert scientific assessment is claimed."
+      },
+      "verifier": {
+        "type": "person",
+        "identifier": "0000-0003-1415-9269",
+        "display_name": "Synthetic independent verifier",
+        "identifier_scheme": "orcid_format_only"
+      },
+      "timestamp_utc": "2026-01-10T09:30:00Z",
+      "conflict_declaration": {
+        "declared": false,
+        "details": "No known conflict is declared for this synthetic event."
+      },
+      "notes": "Synthetic replication report contains synthetic metadata record; local evidence bytes are not packaged. Scientific review is not claimed."
+    }
   },
   {
     "event_id": "MCT-EVT-0004",
-    "schema_version": "0.1.0",
+    "schema_version": "0.3.3-alpha",
     "contribution_type": "metadata_curation",
-    "contributor": {"display_name": "Synthetic Contributor A", "orcid": "0000-0002-1825-0097", "institution": "Example University"},
-    "research_object": {"material_id": "MOF-SYN-004", "title": "Retrospective metadata cleanup for adsorption archive", "doi": "10.0000/example.metadata.004", "repository_url": "https://example.org/repository/mof-syn-004", "accession_id": "EXAMPLE-004"},
-    "evidence": {"links": ["https://example.org/repository/mof-syn-004"], "metadata_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111", "license": "CC-BY-4.0", "file_hashes": ["sha256:2222222222222222222222222222222222222222222222222222222222222222"]},
-    "verification": {"status": "automated_metadata_check", "timestamp_utc": "2026-01-11T14:00:00Z", "notes": "Synthetic metadata completeness check passed."},
-    "scoring_inputs": {"novelty": 0.15, "reusability": 0.75, "reproducibility": 0.70, "validation_level": 0.50, "effort_proxy": 0.35, "negative_result_value": 0.00, "anti_spam_flag": false},
-    "issued_credential": {"credential_id": "MCT-CRED-0004", "non_transferable": true, "chain_tx_hash": null, "issued_at_utc": "2026-01-11T14:05:00Z", "locked": true}
+    "contributor": {
+      "display_name": "Synthetic Contributor A",
+      "orcid": "0000-0002-1825-0097",
+      "institution": "Example University",
+      "orcid_validation_scope": "format_and_checksum_only"
+    },
+    "research_object": {
+      "material_id": "MOF-SYN-004",
+      "title": "Retrospective metadata cleanup for adsorption archive",
+      "doi": "10.0000/example.metadata.004",
+      "repository_url": "https://example.org/repository/mof-syn-004",
+      "accession_id": "EXAMPLE-004"
+    },
+    "evidence": {
+      "links": [
+        "https://example.org/repository/mof-syn-004"
+      ],
+      "metadata_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "license": "CC-BY-4.0"
+    },
+    "scoring_inputs": {
+      "novelty": 0.15,
+      "reusability": 0.75,
+      "reproducibility": 0.7,
+      "effort_proxy": 0.35,
+      "negative_result_value": 0.0,
+      "anti_spam_flag": false
+    },
+    "issued_credential": {
+      "credential_id": "MCT-CRED-0004",
+      "non_transferable": true,
+      "chain_tx_hash": null,
+      "issued_at_utc": "2026-01-11T14:05:00Z",
+      "locked": true,
+      "registry_backend": "repository_database",
+      "registry_record_id": null
+    },
+    "validation": {
+      "metadata_status": "metadata_validated",
+      "evidence_file_status": "not_checked",
+      "file_integrity_status": "not_checked",
+      "source_link_status": "source_link_recorded",
+      "scientific_assessment": {
+        "status": "not_reviewed",
+        "notes": "Synthetic record; no domain-expert scientific assessment is claimed."
+      },
+      "verifier": {
+        "type": "system",
+        "identifier": "system:synthetic-metadata-checker-v0.3.3",
+        "display_name": "Synthetic metadata checker",
+        "identifier_scheme": "system_identifier"
+      },
+      "timestamp_utc": "2026-01-11T14:00:00Z",
+      "conflict_declaration": {
+        "declared": false,
+        "details": "No known conflict is declared for this synthetic event."
+      },
+      "notes": "Synthetic metadata completeness check passed. Scientific review is not claimed."
+    }
   },
   {
     "event_id": "MCT-EVT-0005",
-    "schema_version": "0.1.0",
+    "schema_version": "0.3.3-alpha",
     "contribution_type": "peer_validation",
-    "contributor": {"display_name": "Synthetic Contributor D", "orcid": "0000-0002-2222-3333", "institution": "Example Center"},
-    "research_object": {"material_id": "MOF-SYN-001", "title": "Peer validation of adsorption archive metadata", "doi": "10.0000/example.validation.005", "repository_url": "https://example.org/repository/mof-syn-005", "accession_id": "EXAMPLE-005"},
-    "evidence": {"links": ["https://example.org/repository/mof-syn-005"], "metadata_hash": "sha256:3333333333333333333333333333333333333333333333333333333333333333", "license": "CC-BY-4.0", "file_hashes": ["sha256:4444444444444444444444444444444444444444444444444444444444444444"]},
-    "verification": {"status": "curator_verified", "verified_by_orcid": "0000-0003-1415-9265", "timestamp_utc": "2026-01-12T11:15:00Z", "notes": "Synthetic peer-validation report approved."},
-    "scoring_inputs": {"novelty": 0.25, "reusability": 0.85, "reproducibility": 0.90, "validation_level": 0.95, "effort_proxy": 0.50, "negative_result_value": 0.00, "anti_spam_flag": false},
-    "issued_credential": {"credential_id": "MCT-CRED-0005", "non_transferable": true, "chain_tx_hash": null, "issued_at_utc": "2026-01-12T11:20:00Z", "locked": true}
+    "contributor": {
+      "display_name": "Synthetic Contributor D",
+      "orcid": "0000-0002-2222-3331",
+      "institution": "Example Center",
+      "orcid_validation_scope": "format_and_checksum_only"
+    },
+    "research_object": {
+      "material_id": "MOF-SYN-001",
+      "title": "Peer validation of adsorption archive metadata",
+      "doi": "10.0000/example.validation.005",
+      "repository_url": "https://example.org/repository/mof-syn-005",
+      "accession_id": "EXAMPLE-005"
+    },
+    "evidence": {
+      "links": [
+        "https://example.org/repository/mof-syn-005"
+      ],
+      "metadata_hash": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "license": "CC-BY-4.0"
+    },
+    "scoring_inputs": {
+      "novelty": 0.25,
+      "reusability": 0.85,
+      "reproducibility": 0.9,
+      "effort_proxy": 0.5,
+      "negative_result_value": 0.0,
+      "anti_spam_flag": false
+    },
+    "issued_credential": {
+      "credential_id": "MCT-CRED-0005",
+      "non_transferable": true,
+      "chain_tx_hash": null,
+      "issued_at_utc": "2026-01-12T11:20:00Z",
+      "locked": true,
+      "registry_backend": "repository_database",
+      "registry_record_id": null
+    },
+    "validation": {
+      "metadata_status": "metadata_validated",
+      "evidence_file_status": "not_checked",
+      "file_integrity_status": "not_checked",
+      "source_link_status": "source_link_recorded",
+      "scientific_assessment": {
+        "status": "not_reviewed",
+        "notes": "Synthetic record; no domain-expert scientific assessment is claimed."
+      },
+      "verifier": {
+        "type": "person",
+        "identifier": "0000-0003-1415-9269",
+        "display_name": "Synthetic independent verifier",
+        "identifier_scheme": "orcid_format_only"
+      },
+      "timestamp_utc": "2026-01-12T11:15:00Z",
+      "conflict_declaration": {
+        "declared": false,
+        "details": "No known conflict is declared for this synthetic event."
+      },
+      "notes": "Synthetic metadata record; local evidence bytes are not packaged. Scientific review is not claimed."
+    }
   },
   {
     "event_id": "MCT-EVT-0006",
-    "schema_version": "0.1.0",
+    "schema_version": "0.3.3-alpha",
     "contribution_type": "metadata_curation",
-    "contributor": {"display_name": "Synthetic Contributor A", "orcid": "0000-0002-1825-0097", "institution": "Example University"},
-    "research_object": {"material_id": "MOF-SYN-004", "title": "Duplicate metadata cleanup event for spam-diagnostic demonstration", "doi": "10.0000/example.metadata.006", "repository_url": "https://example.org/repository/mof-syn-006", "accession_id": "EXAMPLE-006"},
-    "evidence": {"links": ["https://example.org/repository/mof-syn-006"], "metadata_hash": "sha256:5555555555555555555555555555555555555555555555555555555555555555", "license": "CC-BY-4.0", "file_hashes": ["sha256:6666666666666666666666666666666666666666666666666666666666666666"]},
-    "verification": {"status": "automated_metadata_check", "timestamp_utc": "2026-01-12T15:00:00Z", "notes": "Synthetic duplicate-like event for anti-spam diagnostics."},
-    "scoring_inputs": {"novelty": 0.10, "reusability": 0.65, "reproducibility": 0.60, "validation_level": 0.45, "effort_proxy": 0.25, "negative_result_value": 0.00, "anti_spam_flag": true},
-    "issued_credential": {"credential_id": "MCT-CRED-0006", "non_transferable": true, "chain_tx_hash": null, "issued_at_utc": "2026-01-12T15:05:00Z", "locked": true}
+    "contributor": {
+      "display_name": "Synthetic Contributor A",
+      "orcid": "0000-0002-1825-0097",
+      "institution": "Example University",
+      "orcid_validation_scope": "format_and_checksum_only"
+    },
+    "research_object": {
+      "material_id": "MOF-SYN-004",
+      "title": "Duplicate metadata cleanup event for spam-diagnostic demonstration",
+      "doi": "10.0000/example.metadata.006",
+      "repository_url": "https://example.org/repository/mof-syn-006",
+      "accession_id": "EXAMPLE-006"
+    },
+    "evidence": {
+      "links": [
+        "https://example.org/repository/mof-syn-006"
+      ],
+      "metadata_hash": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+      "license": "CC-BY-4.0"
+    },
+    "scoring_inputs": {
+      "novelty": 0.1,
+      "reusability": 0.65,
+      "reproducibility": 0.6,
+      "effort_proxy": 0.25,
+      "negative_result_value": 0.0,
+      "anti_spam_flag": true
+    },
+    "issued_credential": {
+      "credential_id": "MCT-CRED-0006",
+      "non_transferable": true,
+      "chain_tx_hash": null,
+      "issued_at_utc": "2026-01-12T15:05:00Z",
+      "locked": true,
+      "registry_backend": "repository_database",
+      "registry_record_id": null
+    },
+    "validation": {
+      "metadata_status": "metadata_validated",
+      "evidence_file_status": "not_checked",
+      "file_integrity_status": "not_checked",
+      "source_link_status": "source_link_recorded",
+      "scientific_assessment": {
+        "status": "not_reviewed",
+        "notes": "Synthetic record; no domain-expert scientific assessment is claimed."
+      },
+      "verifier": {
+        "type": "system",
+        "identifier": "system:synthetic-metadata-checker-v0.3.3",
+        "display_name": "Synthetic metadata checker",
+        "identifier_scheme": "system_identifier"
+      },
+      "timestamp_utc": "2026-01-12T15:00:00Z",
+      "conflict_declaration": {
+        "declared": false,
+        "details": "No known conflict is declared for this synthetic event."
+      },
+      "notes": "Synthetic duplicate-like event for anti-spam diagnostics. Scientific review is not claimed."
+    }
   }
 ]

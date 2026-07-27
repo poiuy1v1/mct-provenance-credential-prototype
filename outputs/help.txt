@@ -3,29 +3,4 @@ usage: mct_reward_simulation.py [-h] [--input INPUT] [--output-dir OUTPUT_DIR]
                                 [--sensitivity-half-lives SENSITIVITY_HALF_LIVES]
                                 [--dry-run] [--version]
 
-Run a synthetic MCT non-financial reward simulation.
-
-options:
-  -h, --help            show this help message and exit
-  --input INPUT         Path to contribution events JSON
-  --output-dir OUTPUT_DIR
-                        Directory for generated tables
-  --half-life-days HALF_LIFE_DAYS
-                        Reputation decay half-life in days
-  --sensitivity-half-lives SENSITIVITY_HALF_LIVES
-                        Comma-separated half-life values for sensitivity
-                        analysis
-  --dry-run             Validate input and print summary without writing
-                        output files
-  --version             show program's version number and exit
-
-Examples:
-  python3 mct_reward_simulation.py
-  python3 mct_reward_simulation.py --input data/example_contributions.json --output-dir outputs
-  python3 mct_reward_simulation.py --half-life-days 180 --sensitivity-half-lives 90,180,365,730
-  python3 mct_reward_simulation.py --dry-run
-
-Interpretation:
-  Scores are non-financial research-recognition values for synthetic
-  contribution events. They are not prices, market values, token balances,
-  investment products, or transferable assets.
+Run a synthetic diagnostic MOF contribution-event calculation.

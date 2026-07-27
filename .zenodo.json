@@ -1,7 +1,7 @@
 {
-  "title": "MCT provenance credential prototype for AI-ready MOF data",
+  "title": "MOF contribution-credential prototype for AI-ready MOF data",
   "upload_type": "software",
-  "description": "Synthetic, non-financial prototype package accompanying Paper 1. This metadata-cleanup release preserves the same prototype logic while using low-risk MCT provenance-credential wording. It demonstrates contribution-schema design, non-financial reputation-score simulation, metadata-style verification, and a non-transferable credential stub. It is not a deployed blockchain, financial token system, cryptocurrency, investment product, or production governance platform.",
+  "description": "Synthetic, non-financial artifact-alignment release with modular JSON Schemas, a UiO-66 worked example, layered validation, an executable notebook, validator and negative tests.",
   "creators": [
     {
       "name": "Wei, Jinnan",
@@ -11,14 +11,13 @@
   ],
   "access_right": "open",
   "license": "MIT",
-  "version": "0.3.2-alpha",
+  "version": "0.3.3-alpha",
   "keywords": [
     "MOF",
     "provenance",
-    "research software",
-    "non-transferable credential",
-    "open science",
-    "supplementary software"
+    "research object",
+    "contribution credential",
+    "reproducibility"
   ],
   "related_identifiers": [
     {
@@ -27,5 +26,5 @@
       "scheme": "url"
     }
   ],
-  "notes": "Metadata-cleanup GitHub release v0.3.2-alpha. This release preserves the same synthetic research-software prototype as v0.3.1-alpha while aligning the public Zenodo title and metadata with non-financial MCT provenance-credential wording. Prior archived DOI: 10.5281/zenodo.20274154. Repository URL: https://github.com/poiuy1v1/mct-provenance-credential-prototype. Release URL: https://github.com/poiuy1v1/mct-provenance-credential-prototype/releases/tag/v0.3.2-alpha."
+  "notes": "Release candidate. Prior archived version-specific DOI: 10.5281/zenodo.20324761. Add the v0.3.3-alpha release date and DOI only after GitHub publishes the tag and Zenodo completes archival."
 }
