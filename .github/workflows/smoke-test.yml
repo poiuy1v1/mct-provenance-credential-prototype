@@ -38,12 +38,18 @@ jobs:
           jupyter nbconvert --to notebook --execute verification_workflow_demo.ipynb --output verification_workflow_demo_executed.ipynb --output-dir outputs --ExecutePreprocessor.timeout=120
           python3 scripts/compare_csv_semantics.py /tmp/v033-verification-results.csv outputs/verification_results.csv
           python3 scripts/compare_notebook_semantics.py /tmp/v033-executed.ipynb outputs/verification_workflow_demo_executed.ipynb
-      - name: Verify release snapshot and stale vocabulary
+      - name: Verify release validation snapshot
         run: |
           export PYTHONDONTWRITEBYTECODE=1
           cp outputs/release_validation.json /tmp/v033-release-validation.json
           python3 scripts/validate_release.py --json > outputs/release_validation.json
           python3 scripts/compare_json_semantics.py /tmp/v033-release-validation.json outputs/release_validation.json
+      - name: Verify no packaged bytecode
+        run: |
+          find . -type d -name '__pycache__' -prune -exec rm -rf {} +
+          find . -type f -name '*.pyc' -delete
           if find . -type d -name '__pycache__' -o -type f -name '*.pyc' | grep -q .; then echo 'Generated Python bytecode detected' >&2; exit 1; fi
+      - name: Scan stale validation vocabulary
+        run: |
           if grep -R -n --exclude-dir=.git --exclude=run_smoke_tests.sh -E 'has_valid_orcid|has_doi|validation_level|verification\.status|evidence_confirmed|scientific_status"|curator_verified_event|Paper 1 v207' .; then echo 'Stale vocabulary detected' >&2; exit 1; fi
           echo '[OK] v0.3.3-alpha end-to-end regression snapshots passed'
