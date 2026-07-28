@@ -1,11 +1,14 @@
-# v0.3.3-alpha release finalization
+# v0.3.3-alpha publication lock
 
-1. Push this complete tree to `release/v0.3.3-alpha-artifact-alignment`.
-2. Confirm the GitHub Actions end-to-end validation job passes.
-3. Merge the reviewed branch to `main`.
-4. Create pre-release tag `v0.3.3-alpha` from the tested commit.
-5. Publish the GitHub pre-release.
-6. In Zenodo GitHub integration, sync the repository and wait for the version-specific DOI.
-7. Backfill the real release date and DOI into `CITATION.cff`, README, SI and manuscript Data availability.
+Publication status: **complete**.
 
-Do not invent or pre-reserve a version DOI in these files.
+- Tested tree merged to `main`: complete.
+- GitHub Actions end-to-end validation: passed.
+- GitHub pre-release tag: `v0.3.3-alpha`.
+- GitHub pre-release publication: complete.
+- Zenodo archival: complete.
+- Publication date: 28 July 2026.
+- Version-specific Zenodo DOI: `10.5281/zenodo.21643012`.
+- Historical v0.3.2-alpha DOI retained: `10.5281/zenodo.20324761`.
+
+The DOI and date are now backfilled into README, CITATION.cff and .zenodo.json on the DOI-backfill branch. The published tag and Zenodo record remain immutable historical artifacts.
