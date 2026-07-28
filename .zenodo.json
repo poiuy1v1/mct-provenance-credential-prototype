@@ -12,6 +12,7 @@
   "access_right": "open",
   "license": "MIT",
   "version": "0.3.3-alpha",
+  "publication_date": "2026-07-28",
   "keywords": [
     "MOF",
     "provenance",
@@ -24,7 +25,17 @@
       "identifier": "https://github.com/poiuy1v1/mct-provenance-credential-prototype",
       "relation": "isSupplementTo",
       "scheme": "url"
+    },
+    {
+      "identifier": "10.5281/zenodo.21643012",
+      "relation": "isIdenticalTo",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.5281/zenodo.20324761",
+      "relation": "isNewVersionOf",
+      "scheme": "doi"
     }
   ],
-  "notes": "Release candidate. Prior archived version-specific DOI: 10.5281/zenodo.20324761. Add the v0.3.3-alpha release date and DOI only after GitHub publishes the tag and Zenodo completes archival."
+  "notes": "GitHub pre-release v0.3.3-alpha, published and archived by Zenodo on 28 July 2026. Version-specific DOI: 10.5281/zenodo.21643012. Historical v0.3.2-alpha DOI: 10.5281/zenodo.20324761."
 }
