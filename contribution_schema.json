@@ -1,8 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.org/mct/contribution-event.schema.json",
-  "title": "MCT Provenance Credential Contribution Event",
-  "description": "Synthetic schema for non-financial MCT provenance-credential contribution events. It is intended for provenance and reputation-credit simulation only, not for financial token issuance.",
+  "title": "MOF contribution-credential event schema",
+  "description": "Synthetic, non-financial contribution-event schema with modular research-object profiles and layered validation states. The research_object field uses oneOf and $ref so a generic record or an inline MOF domain profile can be validated without conflating file integrity with scientific review.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -12,7 +11,7 @@
     "contributor",
     "research_object",
     "evidence",
-    "verification",
+    "validation",
     "scoring_inputs",
     "issued_credential"
   ],
@@ -20,11 +19,11 @@
     "event_id": {
       "type": "string",
       "pattern": "^MCT-EVT-[0-9]{4}$",
-      "description": "Local event identifier used only inside the synthetic prototype."
+      "description": "Legacy local identifier retained for release continuity."
     },
     "schema_version": {
       "type": "string",
-      "const": "0.1.0"
+      "const": "0.3.3-alpha"
     },
     "contribution_type": {
       "type": "string",
@@ -44,6 +43,7 @@
       "required": [
         "display_name",
         "orcid",
+        "orcid_validation_scope",
         "institution"
       ],
       "properties": {
@@ -53,40 +53,28 @@
         },
         "orcid": {
           "type": "string",
-          "pattern": "^\\d{4}-\\d{4}-\\d{4}-\\d{3}[0-9X]$",
-          "description": "ORCID iD string in canonical 16-digit display format."
+          "pattern": "^\\d{4}-\\d{4}-\\d{4}-\\d{3}[0-9X]$"
         },
         "institution": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1
+        },
+        "orcid_validation_scope": {
+          "type": "string",
+          "const": "format_and_checksum_only",
+          "description": "Synthetic identifier passes ORCID format and MOD 11-2 checksum checks; no registry lookup is claimed."
         }
       }
     },
     "research_object": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "material_id",
-        "title"
-      ],
-      "properties": {
-        "material_id": {
-          "type": "string"
+      "oneOf": [
+        {
+          "$ref": "#/$defs/genericResearchObject"
         },
-        "title": {
-          "type": "string"
-        },
-        "doi": {
-          "type": "string",
-          "pattern": "^10\\.[^\\s/]+/.+"
-        },
-        "repository_url": {
-          "type": "string",
-          "format": "uri"
-        },
-        "accession_id": {
-          "type": "string"
+        {
+          "$ref": "#/$defs/mofResearchObject"
         }
-      }
+      ]
     },
     "evidence": {
       "type": "object",
@@ -99,56 +87,168 @@
       "properties": {
         "links": {
           "type": "array",
+          "minItems": 1,
           "items": {
             "type": "string",
             "format": "uri"
-          },
-          "minItems": 1
+          }
         },
         "metadata_hash": {
           "type": "string",
           "pattern": "^sha256:[a-f0-9]{64}$"
         },
         "license": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1
         },
-        "file_hashes": {
+        "files": {
           "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
           "items": {
-            "type": "string",
-            "pattern": "^sha256:[a-f0-9]{64}$"
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "sha256"
+            ],
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^(?!/)(?!.*\\.\\.).+"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            }
           }
         }
       }
     },
-    "verification": {
+    "validation": {
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "status",
-        "timestamp_utc"
+        "metadata_status",
+        "evidence_file_status",
+        "file_integrity_status",
+        "source_link_status",
+        "scientific_assessment",
+        "verifier",
+        "timestamp_utc",
+        "conflict_declaration",
+        "notes"
       ],
       "properties": {
-        "status": {
-          "type": "string",
+        "metadata_status": {
           "enum": [
-            "unverified",
-            "automated_metadata_check",
-            "curator_verified",
-            "challenged",
-            "retracted"
+            "not_checked",
+            "metadata_validated",
+            "metadata_invalid"
           ]
         },
-        "verified_by_orcid": {
-          "type": "string",
-          "pattern": "^\\d{4}-\\d{4}-\\d{4}-\\d{3}[0-9X]$"
+        "evidence_file_status": {
+          "enum": [
+            "not_checked",
+            "evidence_file_present",
+            "evidence_file_missing"
+          ]
+        },
+        "file_integrity_status": {
+          "enum": [
+            "not_checked",
+            "file_integrity_confirmed",
+            "file_integrity_failed"
+          ]
+        },
+        "source_link_status": {
+          "enum": [
+            "not_checked",
+            "source_link_recorded",
+            "source_link_resolved",
+            "source_link_failed"
+          ]
+        },
+        "scientific_assessment": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "notes"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "not_reviewed",
+                "simulated_review",
+                "scientifically_reviewed",
+                "scientifically_disputed"
+              ]
+            },
+            "notes": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "verifier": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "identifier",
+            "identifier_scheme"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "person",
+                "system"
+              ]
+            },
+            "identifier": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Raw checksum-valid ORCID-format string for person records, or a controlled system identifier; no live registry lookup is claimed."
+            },
+            "display_name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "identifier_scheme": {
+              "enum": [
+                "orcid_format_only",
+                "system_identifier"
+              ]
+            }
+          }
         },
         "timestamp_utc": {
           "type": "string",
           "format": "date-time"
         },
+        "conflict_declaration": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "declared",
+            "details"
+          ],
+          "properties": {
+            "declared": {
+              "type": "boolean"
+            },
+            "details": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
         "notes": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1
         }
       }
     },
@@ -159,7 +259,6 @@
         "novelty",
         "reusability",
         "reproducibility",
-        "validation_level",
         "effort_proxy",
         "negative_result_value",
         "anti_spam_flag"
@@ -176,11 +275,6 @@
           "maximum": 1
         },
         "reproducibility": {
-          "type": "number",
-          "minimum": 0,
-          "maximum": 1
-        },
-        "validation_level": {
           "type": "number",
           "minimum": 0,
           "maximum": 1
@@ -212,18 +306,33 @@
       "properties": {
         "credential_id": {
           "type": "string",
-          "pattern": "^MCT-CRED-[0-9]{4}$"
+          "pattern": "^MCT-CRED-[0-9]{4}$",
+          "description": "Legacy identifier retained for release continuity."
         },
         "non_transferable": {
           "type": "boolean",
           "const": true
+        },
+        "registry_backend": {
+          "enum": [
+            "repository_database",
+            "append_only_log",
+            "distributed_ledger",
+            "none"
+          ]
+        },
+        "registry_record_id": {
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "chain_tx_hash": {
           "type": [
             "string",
             "null"
           ],
-          "description": "Null for the synthetic prototype."
+          "description": "Optional legacy field; null in the synthetic release."
         },
         "issued_at_utc": {
           "type": "string",
@@ -236,56 +345,73 @@
       }
     }
   },
-  "examples": [
-    {
-      "event_id": "MCT-EVT-0001",
-      "schema_version": "0.1.0",
-      "contribution_type": "mof_dataset_deposition",
-      "contributor": {
-        "display_name": "Example Contributor",
-        "orcid": "0000-0002-1825-0097",
-        "institution": "Example University"
-      },
-      "research_object": {
-        "material_id": "MOF-EXAMPLE-001",
-        "title": "Synthetic MOF dataset deposition example",
-        "doi": "10.0000/example.mof.dataset",
-        "repository_url": "https://example.org/repository/mof-example-001",
-        "accession_id": "EXAMPLE-001"
-      },
-      "evidence": {
-        "links": [
-          "https://example.org/repository/mof-example-001/metadata.json"
-        ],
-        "metadata_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "license": "CC-BY-4.0",
-        "file_hashes": [
-          "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
-        ]
-      },
-      "verification": {
-        "status": "curator_verified",
-        "verified_by_orcid": "0000-0002-1825-0097",
-        "timestamp_utc": "2026-01-01T00:00:00Z",
-        "notes": "Synthetic example only; no external API call is made."
-      },
-      "scoring_inputs": {
-        "novelty": 0.7,
-        "reusability": 0.9,
-        "reproducibility": 0.8,
-        "validation_level": 0.7,
-        "effort_proxy": 0.6,
-        "negative_result_value": 0.0,
-        "anti_spam_flag": false
-      },
-      "issued_credential": {
-        "credential_id": "MCT-CRED-0001",
-        "non_transferable": true,
-        "chain_tx_hash": null,
-        "issued_at_utc": "2026-01-01T00:00:00Z",
-        "locked": true
+  "$defs": {
+    "genericResearchObject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "material_id",
+        "title"
+      ],
+      "properties": {
+        "material_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "doi": {
+          "type": "string",
+          "pattern": "^10\\.[^\\s/]+/.+"
+        },
+        "repository_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "accession_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "mofResearchObject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "material_id",
+        "title",
+        "domain_profile"
+      ],
+      "properties": {
+        "material_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "doi": {
+          "type": "string",
+          "pattern": "^10\\.[^\\s/]+/.+"
+        },
+        "repository_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "accession_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "domain_profile": {
+          "$ref": "MOF_WorkedExample/mof_research_object_profile.schema.json"
+        }
       }
     }
-  ],
-  "$comment": "Examples are synthetic and included to support reviewer inspection; they do not represent token issuance or a deployed chain."
+  },
+  "$comment": "All examples are synthetic. Relative $ref paths are resolved inside the release bundle. Format/checksum validation does not authenticate ORCID or DOI registry records; file integrity does not establish scientific truth."
 }

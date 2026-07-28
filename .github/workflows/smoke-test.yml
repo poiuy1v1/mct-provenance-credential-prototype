@@ -1,19 +1,55 @@
-name: Smoke test
-
-on:
-  push:
-  pull_request:
-  workflow_dispatch:
-
+name: End-to-end artifact validation
+on: [push, pull_request, workflow_dispatch]
 jobs:
-  smoke-test:
+  validate:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Run smoke tests
-        run: bash scripts/run_smoke_tests.sh
+      - name: Install dependencies
+        run: python3 -m pip install -r requirements.txt
+      - name: Register notebook kernel
+        run: python3 -m ipykernel install --user --name python3 --display-name 'Python 3'
+      - name: Validate schemas and policies
+        run: |
+          export PYTHONDONTWRITEBYTECODE=1
+          python3 scripts/validate_release.py --json
+          python3 -m unittest discover -s tests -v
+          python3 -m unittest discover -s MOF_WorkedExample/tests -v
+      - name: Execute scoring model
+        run: |
+          export PYTHONDONTWRITEBYTECODE=1
+          mkdir -p /tmp/v033-expected
+          cp outputs/diagnostic_event_scores.csv outputs/diagnostic_sensitivity.csv outputs/summary.json outputs/simulation_dry_run_stdout.json outputs/simulation_stdout.json /tmp/v033-expected/
+          python3 mct_reward_simulation.py --dry-run > outputs/simulation_dry_run_stdout.json
+          python3 mct_reward_simulation.py --input data/example_contributions.json --output-dir outputs > outputs/simulation_stdout.json
+          python3 scripts/compare_csv_semantics.py /tmp/v033-expected/diagnostic_event_scores.csv outputs/diagnostic_event_scores.csv
+          python3 scripts/compare_csv_semantics.py /tmp/v033-expected/diagnostic_sensitivity.csv outputs/diagnostic_sensitivity.csv
+          python3 scripts/compare_json_semantics.py /tmp/v033-expected/summary.json outputs/summary.json
+          python3 scripts/compare_json_semantics.py /tmp/v033-expected/simulation_dry_run_stdout.json outputs/simulation_dry_run_stdout.json
+          python3 scripts/compare_json_semantics.py /tmp/v033-expected/simulation_stdout.json outputs/simulation_stdout.json
+      - name: Execute verification notebook
+        run: |
+          export PYTHONDONTWRITEBYTECODE=1
+          cp outputs/verification_results.csv /tmp/v033-verification-results.csv
+          cp outputs/verification_workflow_demo_executed.ipynb /tmp/v033-executed.ipynb
+          jupyter nbconvert --to notebook --execute verification_workflow_demo.ipynb --output verification_workflow_demo_executed.ipynb --output-dir outputs --ExecutePreprocessor.timeout=120
+          python3 scripts/compare_csv_semantics.py /tmp/v033-verification-results.csv outputs/verification_results.csv
+          python3 scripts/compare_notebook_semantics.py /tmp/v033-executed.ipynb outputs/verification_workflow_demo_executed.ipynb
+      - name: Verify release validation snapshot
+        run: |
+          export PYTHONDONTWRITEBYTECODE=1
+          cp outputs/release_validation.json /tmp/v033-release-validation.json
+          python3 scripts/validate_release.py --json > outputs/release_validation.json
+          python3 scripts/compare_json_semantics.py /tmp/v033-release-validation.json outputs/release_validation.json
+      - name: Verify no packaged bytecode
+        run: |
+          find . -type d -name '__pycache__' -prune -exec rm -rf {} +
+          find . -type f -name '*.pyc' -delete
+          if find . -type d -name '__pycache__' -o -type f -name '*.pyc' | grep -q .; then echo 'Generated Python bytecode detected' >&2; exit 1; fi
+      - name: Scan stale validation vocabulary
+        run: |
+          if grep -R -n --exclude-dir=.git --exclude=run_smoke_tests.sh --exclude=smoke-test.yml -E 'has_valid_orcid|has_doi|validation_level|verification\.status|evidence_confirmed|scientific_status"|curator_verified_event|Paper 1 v207' .; then echo 'Stale vocabulary detected' >&2; exit 1; fi
+          echo '[OK] v0.3.3-alpha end-to-end regression snapshots passed'
