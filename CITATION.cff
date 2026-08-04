@@ -1,12 +1,13 @@
 cff-version: 1.2.0
-message: "Cite this software after the v0.3.3-alpha release DOI has been issued."
+message: "Local unpublished 0.3.4-alpha candidate; do not cite it as a released or archived version."
 title: "MOF contribution-credential prototype for AI-ready MOF data"
-version: "0.3.3-alpha"
+type: software
+version: "0.3.4-alpha"
 authors:
   - family-names: "Wei"
     given-names: "Jinnan"
     affiliation: "Department of Chemistry, University of Cambridge"
     orcid: "https://orcid.org/0009-0006-5356-0441"
-abstract: "Synthetic, non-financial release candidate with modular JSON Schemas, layered validation, an executable notebook and a machine-readable MOF worked example."
 license: "MIT"
 repository-code: "https://github.com/poiuy1v1/mct-provenance-credential-prototype"
+abstract: "Synthetic, non-financial and non-ranking local software candidate for provenance and contribution-event validation."

@@ -1,13 +1,19 @@
 {
-  "prototype_version": "0.3.3-alpha",
-  "prototype_scope": "synthetic diagnostic contribution scoring; not a researcher-ranking metric",
-  "disclaimer": "Diagnostic event scores are synthetic software-test outputs only. They are not prices, token balances, researcher rankings, hiring or grant metrics, authorship criteria, governance entitlements, or evidence that a scientific claim is true.",
-  "input_file": "data/example_contributions.json",
-  "half_life_days": 365.0,
-  "num_events": 6,
-  "diagnostic_score_sum": 23.0324,
+  "by_contribution_type": {
+    "metadata_curation": 2.1832,
+    "mof_dataset_deposition": 6.9382,
+    "negative_synthesis_record": 3.9481,
+    "peer_validation": 3.3479,
+    "replication_study": 6.615
+  },
+  "diagnostic_score_max": 6.9382,
   "diagnostic_score_mean": 3.8387,
   "diagnostic_score_min": 0.6553,
-  "diagnostic_score_max": 6.9382,
-  "by_contribution_type": {"metadata_curation": 2.1832, "mof_dataset_deposition": 6.9382, "negative_synthesis_record": 3.9481, "peer_validation": 3.3479, "replication_study": 6.615}
+  "diagnostic_score_sum": 23.0324,
+  "disclaimer": "Diagnostic event scores are synthetic software-test outputs only. They are not prices, token balances, researcher rankings, hiring or grant metrics, authorship criteria, governance entitlements, or evidence that a scientific claim is true.",
+  "half_life_days": 365.0,
+  "input_file": "data/example_contributions.json",
+  "num_events": 6,
+  "prototype_scope": "synthetic diagnostic contribution scoring; not a researcher-ranking metric",
+  "prototype_version": "0.3.4-alpha"
 }
