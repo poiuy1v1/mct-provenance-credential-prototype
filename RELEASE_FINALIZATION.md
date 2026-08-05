@@ -1,35 +1,41 @@
-# v0.3.4-alpha release finalisation gates
+# v0.3.4-alpha release provenance and publication policy
 
-Nothing in this local candidate records an action below as completed.
+## 1. Completed executable evidence
 
-## 1. Pre-release candidate checks
+- The bounded software candidate underwent independent executable regression
+  audit before repository integration.
+- Pull request #3 merged the audited implementation into `main` as commit
+  `8182e30cdd790a99d7cb80b4416b6ee095aad9a2`, preserving tree
+  `d3e03909ed60b43a07ceb1ba36334dd6e83b43d6`.
+- GitHub Actions run #38 passed on both Ubuntu and Windows with the real
+  `nbclient` acceptance backend.
+- The authoritative synthetic six-event diagnostic sum is `23.0324`.
 
-- Run exact clean-environment schema, policy, unit, negative, notebook,
-  snapshot, path, secret, stale-file and package checks.
-- Require the `nbclient` acceptance backend and retain its exact environment.
-- Obtain an independent audit of the candidate ZIP and reports.
+## 2. Release creation rule
 
-## 2. Human GitHub branch, PR, CI and merge approval
+- Create tag `v0.3.4-alpha` only from a metadata-finalised, green-validated
+  `main` commit.
+- Publish the GitHub release as a pre-release.
+- Preserve the historical `v0.3.3-alpha` tag and release unchanged.
 
-- A responsible human may later approve a branch, pull request, cloud CI and
-  merge. This v235.1 task authorises none of those actions.
+## 3. Zenodo version rule
 
-## 3. GitHub tag and pre-release creation
+- Synchronise a new Zenodo software version only after the GitHub pre-release
+  exists.
+- Do not overwrite the historical record `10.5281/zenodo.21643012`.
+- Treat the DOI assigned to the new Zenodo version as the authoritative
+  version-specific identifier.
 
-- Only after human approval may a new `v0.3.4-alpha` tag and pre-release be
-  created. The historical `v0.3.3-alpha` tag must remain unchanged.
+## 4. DOI, date and archive capture
 
-## 4. Zenodo version creation or synchronisation
+- Record the actual DOI, publication date, release commit and archive checksum
+  only after GitHub and Zenodo have created them.
+- Do not predict or prefill identifiers or dates in repository metadata.
 
-- Only after the GitHub release exists may a human create/synchronise a new
-  Zenodo software version. The historical record must not be overwritten.
+## 5. Manuscript and supporting-information alignment
 
-## 5. Post-release DOI and date capture
-
-- Record the actual version DOI, release date, commit and archive hash only
-  after they exist. Do not predict or prefill them.
-
-## 6. Later manuscript and SI backfill
-
-- A separately authorised v236 document stage may update Main/SI to the actual
-  superseding release and correct the unsupported SI value `26.2855`.
+- A separately authorised document stage may cite the final archived
+  `v0.3.4-alpha` release and its version-specific DOI.
+- The value `26.2855` in an earlier supporting-information draft is unsupported
+  by the executable evidence and must be corrected to the reproducible value
+  `23.0324` in that later document stage.
