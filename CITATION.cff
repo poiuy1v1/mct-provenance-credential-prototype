@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "Local unpublished 0.3.4-alpha candidate; do not cite it as a released or archived version."
+message: "If you use this software, cite the corresponding archived software release."
 title: "MOF contribution-credential prototype for AI-ready MOF data"
 type: software
 version: "0.3.4-alpha"
@@ -10,4 +10,4 @@ authors:
     orcid: "https://orcid.org/0009-0006-5356-0441"
 license: "MIT"
 repository-code: "https://github.com/poiuy1v1/mct-provenance-credential-prototype"
-abstract: "Synthetic, non-financial and non-ranking local software candidate for provenance and contribution-event validation."
+abstract: "Synthetic, non-financial and non-ranking software for provenance and contribution-event validation."
