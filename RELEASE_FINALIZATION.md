@@ -1,33 +1,41 @@
 # v0.3.4-alpha release provenance and publication policy
 
-## Completed gates
+## 1. Completed executable evidence
 
-- The executable candidate passed independent review of its score provenance,
-  real `nbclient` notebook execution, deterministic outputs and package checks.
-- The audited candidate was integrated through a pull request.
-- Pull-request CI passed on `ubuntu-latest` and `windows-latest`.
-- The pull request was squash-merged into `main` as commit
-  `8182e30cdd790a99d7cb80b4416b6ee095aad9a2` with tree
+- The bounded software candidate underwent independent executable regression
+  audit before repository integration.
+- Pull request #3 merged the audited implementation into `main` as commit
+  `8182e30cdd790a99d7cb80b4416b6ee095aad9a2`, preserving tree
   `d3e03909ed60b43a07ceb1ba36334dd6e83b43d6`.
-- Post-merge CI Run #38 passed on `ubuntu-latest` and `windows-latest`.
+- GitHub Actions run #38 passed on both Ubuntu and Windows with the real
+  `nbclient` acceptance backend.
+- The authoritative synthetic six-event diagnostic sum is `23.0324`.
 
-## Publication gates still requiring real external events
+## 2. Release creation rule
 
-1. Create the `v0.3.4-alpha` Git tag from the final metadata commit on `main`.
-2. Publish the corresponding GitHub pre-release.
-3. Allow Zenodo to create or synchronise a new software version without
-   overwriting the historical `v0.3.3-alpha` record.
-4. Capture the actual version-specific DOI, publication date, final commit and
-   archive hash only after they exist.
-5. Update citation metadata and the manuscript/SI only in a separately
-   authorised post-release backfill stage.
+- Create tag `v0.3.4-alpha` only from a metadata-finalised, green-validated
+  `main` commit.
+- Publish the GitHub release as a pre-release.
+- Preserve the historical `v0.3.3-alpha` tag and release unchanged.
 
-No DOI, release date, tag, GitHub Release or Zenodo archive is predicted or
-prefilled by this file.
+## 3. Zenodo version rule
 
-## Scientific and usage boundary
+- Synchronise a new Zenodo software version only after the GitHub pre-release
+  exists.
+- Do not overwrite the historical record `10.5281/zenodo.21643012`.
+- Treat the DOI assigned to the new Zenodo version as the authoritative
+  version-specific identifier.
 
-The authoritative executable diagnostic sum is `23.0324`. The frozen SI value
-`26.2855` has no bundled executable provenance and must be handled in the later
-document stage. All records remain synthetic; the software is non-financial,
-non-transferable and non-ranking, and it does not establish scientific truth.
+## 4. DOI, date and archive capture
+
+- Record the actual DOI, publication date, release commit and archive checksum
+  only after GitHub and Zenodo have created them.
+- Do not predict or prefill identifiers or dates in repository metadata.
+
+## 5. Manuscript and supporting-information alignment
+
+- A separately authorised document stage may cite the final archived
+  `v0.3.4-alpha` release and its version-specific DOI.
+- The value `26.2855` in an earlier supporting-information draft is unsupported
+  by the executable evidence and must be corrected to the reproducible value
+  `23.0324` in that later document stage.

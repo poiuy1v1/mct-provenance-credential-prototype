@@ -1,7 +1,7 @@
 {
   "title": "MOF contribution-credential prototype for AI-ready MOF data",
   "upload_type": "software",
-  "description": "Synthetic, non-financial and non-ranking provenance demonstration with deterministic scoring, real nbclient notebook execution and clean-output validation.",
+  "description": "Synthetic, non-financial and non-ranking provenance demonstration with deterministic scoring, real nbclient notebook execution, and clean-output validation.",
   "creators": [
     {
       "name": "Wei, Jinnan",
@@ -26,5 +26,5 @@
       "scheme": "doi"
     }
   ],
-  "notes": "The related DOI identifies the historical v0.3.3-alpha release. The version-specific DOI and publication date for v0.3.4-alpha must be captured only after Zenodo creates the new archived version."
+  "notes": "This version supersedes v0.3.3-alpha. The related identifier points to the historical release; the Zenodo record for this release provides the version-specific DOI."
 }
