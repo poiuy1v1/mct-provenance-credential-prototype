@@ -1,6 +1,0 @@
-usage: mct_reward_simulation.py [-h] [--input INPUT] [--output-dir OUTPUT_DIR]
-                                [--half-life-days HALF_LIFE_DAYS]
-                                [--sensitivity-half-lives SENSITIVITY_HALF_LIVES]
-                                [--dry-run] [--version]
-
-Run a synthetic diagnostic MOF contribution-event calculation.

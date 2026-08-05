@@ -1,23 +1,10 @@
-# Python caches
 __pycache__/
-*.py[cod]
-.ipynb_checkpoints/
-
-# Local environment files
-.env
-.venv/
-venv/
-
-# OS/editor files
-.DS_Store
-.vscode/
-.idea/
-
-# Temporary release artifacts
-*.tmp
-*.bak
 *.pyc
-*.pyo
+.venv/
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+build/
+generated/
 *.aux
 *.log
-*.out

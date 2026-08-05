@@ -1,11 +1,20 @@
 # Changelog
 
-## v0.3.3-alpha - executable artifact alignment release candidate
+## v0.3.4-alpha - Unreleased local candidate
 
-- Composed generic and MOF research-object schemas using `oneOf` and `$ref`.
-- Standardised validation vocabulary across JSON, notebook, outputs, manuscript and SI.
-- Separated metadata, file-presence, integrity, source-link and scientific-assessment multipliers.
-- Set all distributed synthetic event records to `scientific_assessment.status = not_reviewed`.
-- Added complete release validation, negative tests and notebook execution to CI.
-- Renamed scalar outputs as diagnostic event scores and removed contributor aggregates from the default summary.
-- Removed release-date and archived-version claims until GitHub and Zenodo publication are complete.
+- Reconciled score provenance to the executable `23.0324` diagnostic value.
+- Added genuine execution-state and deterministic-output notebook regression.
+- Added mandatory notebook negative cases and output snapshot hardening.
+- Added cross-platform clean-directory generation and reproducibility checks.
+- Hardened project-relative input labels across Windows, UNC and POSIX syntax,
+  including traversal and symlink-containment checks before file reads.
+- Replaced the diagnostic notebook snapshot with real `nbclient` output and
+  added committed-versus-regenerated semantic comparison.
+- Added Windows/Ubuntu matrix validation of package manifests and checksums.
+- Aligned candidate metadata without inventing a DOI or release date.
+
+## v0.3.3-alpha - Historical published release
+
+- Historical release archived as DOI `10.5281/zenodo.21643012`.
+- Its score and notebook-snapshot defects are retained as historical provenance
+  and are not rewritten by this candidate.

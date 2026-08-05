@@ -3,8 +3,7 @@ Record ID: SYN-UIO66-001
 Framework family: UiO-66
 Illustrative precursor: zirconium(IV) chloride
 Illustrative linker: benzene-1,4-dicarboxylic acid
-Illustrative solvent: N,N-dimethylformamide
-Illustrative reaction temperature: 120 C
-Illustrative reaction duration: 24 h
-Outcome: successful_example
-Purpose: demonstrate a machine-readable MOF research-object profile only.
+Illustrative solvent: DMF
+Illustrative temperature: 120 C
+Illustrative duration: 24 h
+Scientific assessment: not_reviewed

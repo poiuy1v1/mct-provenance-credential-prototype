@@ -1,21 +1,35 @@
 {
-  "contribution_events": 6,
-  "contribution_schema": "PASS",
-  "portable_relative_mof_schema_ref": "PASS",
-  "inline_standalone_profile_identity": "PASS",
-  "orcid_format_and_checksum_policy": "PASS",
-  "doi_format_policy": "PASS",
-  "self_verification_policy": "PASS",
-  "packaged_evidence_grounding": "PASS",
-  "offline_source_link_policy": "PASS",
-  "synthetic_scientific_boundary": "PASS",
-  "mof_worked_example": {
-    "schema": "PASS",
-    "identity": "PASS",
-    "conflict": "PASS",
-    "source_link_policy": "PASS",
-    "evidence": "PASS",
-    "hashes": "PASS",
-    "scientific_boundary": "PASS"
+  "candidate_version": "0.3.4-alpha",
+  "failures": [],
+  "overall_status": "PASS",
+  "results": {
+    "metadata": {
+      "candidate_doi": "ABSENT",
+      "candidate_release_date": "ABSENT",
+      "historical_v0.3.3_doi": "10.5281/zenodo.21643012",
+      "metadata_boundary": "PASS"
+    },
+    "mof_profile": {
+      "mof_profile": "PASS",
+      "synthetic_evidence_files": [
+        "example_pxrd_pattern.xy",
+        "example_synthesis_log.txt"
+      ]
+    },
+    "schema_and_events": {
+      "candidate_version": "0.3.4-alpha",
+      "contribution_events": 6,
+      "non_transferable_boundary": "PASS",
+      "scientific_assessment_boundary": "PASS",
+      "self_verification_rejection": "PASS"
+    },
+    "score": {
+      "authoritative_diagnostic_score": 23.0324,
+      "diagnostic_rows": 6,
+      "ranking_output": "ABSENT"
+    },
+    "stale_vocabulary": {
+      "stale_validation_vocabulary": "ABSENT"
+    }
   }
 }

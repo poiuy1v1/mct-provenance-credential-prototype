@@ -1,7 +1,7 @@
-event_id,contribution_type,metadata_status,evidence_file_status,file_integrity_status,source_link_status,scientific_assessment_status,orcid_format_matches,orcid_checksum_valid,doi_format_matches,repository_url_format_matches,evidence_link_recorded,self_verification_rejected,is_non_transferable,is_locked,checks_passed,checks_total
-MCT-EVT-0001,mof_dataset_deposition,metadata_validated,evidence_file_present,file_integrity_confirmed,source_link_recorded,not_reviewed,True,True,True,True,True,True,True,True,8,8
-MCT-EVT-0002,negative_synthesis_record,metadata_validated,not_checked,not_checked,source_link_recorded,not_reviewed,True,True,True,True,True,True,True,True,8,8
-MCT-EVT-0003,replication_study,metadata_validated,not_checked,not_checked,source_link_recorded,not_reviewed,True,True,True,True,True,True,True,True,8,8
-MCT-EVT-0004,metadata_curation,metadata_validated,not_checked,not_checked,source_link_recorded,not_reviewed,True,True,True,True,True,True,True,True,8,8
-MCT-EVT-0005,peer_validation,metadata_validated,not_checked,not_checked,source_link_recorded,not_reviewed,True,True,True,True,True,True,True,True,8,8
-MCT-EVT-0006,metadata_curation,metadata_validated,not_checked,not_checked,source_link_recorded,not_reviewed,True,True,True,True,True,True,True,True,8,8
+event_id,metadata_status,evidence_file_status,file_integrity_status,source_link_status,scientific_assessment_status,credential_locked,contributor_verifier_separated
+MCT-EVT-0001,metadata_validated,evidence_file_present,file_integrity_confirmed,source_link_recorded,not_reviewed,True,True
+MCT-EVT-0002,metadata_validated,not_checked,not_checked,source_link_recorded,not_reviewed,True,True
+MCT-EVT-0003,metadata_validated,not_checked,not_checked,source_link_recorded,not_reviewed,True,True
+MCT-EVT-0004,metadata_validated,not_checked,not_checked,source_link_recorded,not_reviewed,True,True
+MCT-EVT-0005,metadata_validated,not_checked,not_checked,source_link_recorded,not_reviewed,True,True
+MCT-EVT-0006,metadata_validated,not_checked,not_checked,source_link_recorded,not_reviewed,True,True

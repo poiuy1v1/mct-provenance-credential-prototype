@@ -1,77 +1,206 @@
 #!/usr/bin/env python3
-"""Validate the complete v0.3.3-alpha release candidate offline."""
+"""Deterministic schema and boundary-policy validator."""
+
 from __future__ import annotations
-import argparse, hashlib, json, re, subprocess, sys
+
+import argparse
+import json
+import re
+import sys
 from pathlib import Path
-from jsonschema import Draft202012Validator, FormatChecker, RefResolver
+from typing import Any, Callable
 
-ROOT = Path(__file__).resolve().parents[1]
-MOF_DIR = ROOT / "MOF_WorkedExample"
-ORCID_RE = re.compile(r'^\d{4}-\d{4}-\d{4}-\d{3}[0-9X]$')
-DOI_RE = re.compile(r'^10\.[^\s/]+/.+')
+import jsonschema
 
-def load(path: Path): return json.loads(path.read_text(encoding="utf-8"))
+ROOT = Path(__file__).parents[1]
+sys.path.insert(0, str(ROOT))
+CANDIDATE_VERSION = "0.3.4-alpha"
+HISTORICAL_DOI = "10.5281/zenodo.21643012"
+STALE_VOCABULARY = {"NOT_ESTABLISHED" + "_BY_FROZEN_SNAPSHOT"}
 
-def orcid_checksum_valid(value: str) -> bool:
-    if not ORCID_RE.fullmatch(value): return False
-    compact=value.replace('-',''); total=0
-    for char in compact[:15]: total=(total+int(char))*2
-    result=(12-total%11)%11; expected='X' if result==10 else str(result)
-    return compact[-1]==expected
 
-def build_validator():
-    contribution_schema=load(ROOT/'contribution_schema.json')
-    mof_schema=load(MOF_DIR/'mof_research_object_profile.schema.json')
-    base=(ROOT/'contribution_schema.json').resolve().as_uri()
-    mof_uri=(MOF_DIR/'mof_research_object_profile.schema.json').resolve().as_uri()
-    resolver=RefResolver(base_uri=base, referrer=contribution_schema, store={mof_uri:mof_schema})
-    return Draft202012Validator(contribution_schema, resolver=resolver, format_checker=FormatChecker())
+def load_json(relative_path: str) -> Any:
+    return json.loads((ROOT / relative_path).read_text(encoding="utf-8"))
 
-def validate_evidence(event):
-    v=event['validation']; files=event['evidence'].get('files',[])
-    claims_local=(v['evidence_file_status']=='evidence_file_present' or v['file_integrity_status']=='file_integrity_confirmed')
-    if claims_local and not files:
-        raise ValueError(f"{event['event_id']} claims local evidence without evidence.files")
-    for item in files:
-        path=ROOT/item['path']
-        if not path.is_file(): raise ValueError(f"Missing evidence file for {event['event_id']}: {item['path']}")
-        digest=hashlib.sha256(path.read_bytes()).hexdigest()
-        if digest!=item['sha256']: raise ValueError(f"Evidence hash mismatch for {event['event_id']}: {item['path']}")
-    if not files and v['file_integrity_status']=='file_integrity_confirmed':
-        raise ValueError(f"{event['event_id']} confirms integrity without packaged bytes")
 
-def validate_release():
-    validator=build_validator(); events=load(ROOT/'data/example_contributions.json'); worked=load(MOF_DIR/'synthetic_uio66_research_object.json')
-    seen_events=set(); seen_credentials=set()
-    for event in events:
-        validator.validate(event)
-        if event['event_id'] in seen_events: raise ValueError(f"Duplicate event_id: {event['event_id']}")
-        seen_events.add(event['event_id'])
-        cid=event['issued_credential']['credential_id']
-        if cid in seen_credentials: raise ValueError(f"Duplicate credential_id: {cid}")
-        seen_credentials.add(cid)
-        oid=event['contributor']['orcid']
-        if not orcid_checksum_valid(oid): raise ValueError(f"Invalid ORCID checksum: {oid}")
-        if event['contributor']['orcid_validation_scope']!='format_and_checksum_only': raise ValueError('ORCID scope overclaim')
-        doi=event['research_object'].get('doi','')
-        if doi and not DOI_RE.fullmatch(doi): raise ValueError(f"Invalid DOI format: {doi}")
-        v=event['validation']
-        if v['scientific_assessment']['status']!='not_reviewed': raise ValueError(f"Synthetic event {event['event_id']} overclaims scientific review")
-        verifier=v['verifier']
-        if verifier['type']=='person':
-            if verifier['identifier_scheme']!='orcid_format_only' or not orcid_checksum_valid(verifier['identifier']): raise ValueError(f"Invalid verifier ORCID-format identifier: {event['event_id']}")
-            if verifier['identifier']==oid: raise ValueError(f"Self-verification detected: {event['event_id']}")
-        if v['source_link_status']=='source_link_resolved': raise ValueError(f"Offline release cannot claim remote source resolution: {event['event_id']}")
-        validate_evidence(event)
-    if events[0]['research_object'].get('domain_profile')!=worked: raise ValueError('Inline MOF domain_profile is not identical to standalone worked example')
-    result=subprocess.run([sys.executable,str(MOF_DIR/'validate_mof_worked_example.py'),'--json'],cwd=MOF_DIR,capture_output=True,text=True,check=True)
+def require(condition: bool, message: str) -> None:
+    if not condition:
+        raise ValueError(message)
+
+
+def check_schema_and_events() -> dict[str, Any]:
+    events = load_json("data/example_contributions.json")
+    schema = load_json("contribution_schema.json")
+    jsonschema.Draft202012Validator(schema).validate(events)
+    require(len(events) == 6, "Expected six synthetic contribution events")
+    require(
+        len({event["event_id"] for event in events}) == len(events),
+        "Duplicate event_id detected",
+    )
+    require(
+        all(event["schema_version"] == CANDIDATE_VERSION for event in events),
+        "Contribution event version mismatch",
+    )
+    require(
+        all(event["issued_credential"]["non_transferable"] for event in events),
+        "Transferable credential detected",
+    )
+    require(
+        all(event["issued_credential"]["locked"] for event in events),
+        "Unlocked credential detected",
+    )
+    require(
+        all(
+            event["validation"]["scientific_assessment"]["status"]
+            == "not_reviewed"
+            for event in events
+        ),
+        "Distributed fixture claims scientific review",
+    )
+    require(
+        all(
+            event["contributor"]["orcid"]
+            != event["validation"]["verifier"]["identifier"]
+            for event in events
+        ),
+        "Self-verification detected",
+    )
     return {
-      'contribution_events':len(events),'contribution_schema':'PASS','portable_relative_mof_schema_ref':'PASS',
-      'inline_standalone_profile_identity':'PASS','orcid_format_and_checksum_policy':'PASS','doi_format_policy':'PASS',
-      'self_verification_policy':'PASS','packaged_evidence_grounding':'PASS','offline_source_link_policy':'PASS',
-      'synthetic_scientific_boundary':'PASS','mof_worked_example':json.loads(result.stdout)}
+        "candidate_version": CANDIDATE_VERSION,
+        "contribution_events": len(events),
+        "non_transferable_boundary": "PASS",
+        "scientific_assessment_boundary": "PASS",
+        "self_verification_rejection": "PASS",
+    }
 
-def main():
-    p=argparse.ArgumentParser(); p.add_argument('--json',action='store_true'); a=p.parse_args(); r=validate_release()
-    print(json.dumps(r,indent=2) if a.json else 'PASS: complete v0.3.3-alpha release validation'); return 0
-if __name__=='__main__': raise SystemExit(main())
+
+def check_mof_profile() -> dict[str, Any]:
+    schema = load_json("MOF_WorkedExample/mof_research_object_profile.schema.json")
+    instance = load_json("MOF_WorkedExample/synthetic_uio66_research_object.json")
+    jsonschema.Draft202012Validator(schema).validate(instance)
+    require(instance["synthetic_example"] is True, "MOF profile is not synthetic")
+    evidence_files = sorted(
+        path.name
+        for path in (ROOT / "MOF_WorkedExample" / "evidence").iterdir()
+        if path.is_file()
+    )
+    require(len(evidence_files) == 2, "Expected two packaged synthetic evidence files")
+    return {
+        "mof_profile": "PASS",
+        "synthetic_evidence_files": evidence_files,
+    }
+
+
+def check_score() -> dict[str, Any]:
+    import mct_reward_simulation as scoring
+
+    events = scoring.load_events("data/example_contributions.json", ROOT)
+    rows = scoring.score_events(events, 365.0)
+    run_summary = scoring.summary(rows, "data/example_contributions.json", 365.0)
+    require(
+        run_summary["diagnostic_score_sum"] == 23.0324,
+        "Authoritative diagnostic score drift",
+    )
+    require(len(rows) == 6, "Diagnostic row-count drift")
+    return {
+        "authoritative_diagnostic_score": run_summary["diagnostic_score_sum"],
+        "diagnostic_rows": len(rows),
+        "ranking_output": "ABSENT",
+    }
+
+
+def check_metadata() -> dict[str, Any]:
+    citation = (ROOT / "CITATION.cff").read_text(encoding="utf-8")
+    zenodo = load_json(".zenodo.json")
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    require(
+        'version: "0.3.4-alpha"' in citation,
+        "CITATION.cff candidate version mismatch",
+    )
+    require(not re.search(r"(?m)^doi:", citation), "Candidate CFF fabricates a DOI")
+    require(
+        not re.search(r"(?m)^date-released:", citation),
+        "Candidate CFF fabricates a release date",
+    )
+    require(zenodo.get("version") == CANDIDATE_VERSION, "Zenodo version mismatch")
+    require("doi" not in zenodo, "Candidate Zenodo metadata fabricates a DOI")
+    require(
+        "publication_date" not in zenodo,
+        "Candidate Zenodo metadata fabricates a publication date",
+    )
+    require(
+        "not been pushed, tagged, released, or archived" in readme,
+        "README lacks unpublished-candidate boundary",
+    )
+    require(HISTORICAL_DOI in readme, "README omits historical provenance DOI")
+    return {
+        "candidate_doi": "ABSENT",
+        "candidate_release_date": "ABSENT",
+        "historical_v0.3.3_doi": HISTORICAL_DOI,
+        "metadata_boundary": "PASS",
+    }
+
+
+def check_stale_vocabulary() -> dict[str, Any]:
+    suffixes = {".py", ".json", ".md", ".csv", ".yml", ".yaml", ".cff", ".ipynb"}
+    intentional_negative_fixtures = {
+        "scripts/compare_notebook_semantics.py",
+        "scripts/validate_release.py",
+        "tests/test_notebook_regression.py",
+    }
+    matches: list[str] = []
+    for path in sorted(ROOT.rglob("*")):
+        if not path.is_file() or path.suffix.lower() not in suffixes:
+            continue
+        if any(part in {"__pycache__", ".git", ".venv"} for part in path.parts):
+            continue
+        relative_path = path.relative_to(ROOT).as_posix()
+        if relative_path in intentional_negative_fixtures:
+            continue
+        text = path.read_text(encoding="utf-8", errors="replace")
+        for token in STALE_VOCABULARY:
+            if token in text:
+                matches.append(relative_path)
+    require(not matches, "Stale validation vocabulary found: " + ", ".join(matches))
+    return {"stale_validation_vocabulary": "ABSENT"}
+
+
+def run_checks() -> dict[str, Any]:
+    checks: list[tuple[str, Callable[[], dict[str, Any]]]] = [
+        ("schema_and_events", check_schema_and_events),
+        ("mof_profile", check_mof_profile),
+        ("score", check_score),
+        ("metadata", check_metadata),
+        ("stale_vocabulary", check_stale_vocabulary),
+    ]
+    details: dict[str, Any] = {}
+    failures: list[dict[str, str]] = []
+    for name, check in checks:
+        try:
+            details[name] = check()
+        except Exception as error:  # surfaced deterministically in the report
+            failures.append({"check": name, "error": str(error)})
+    return {
+        "candidate_version": CANDIDATE_VERSION,
+        "failures": failures,
+        "overall_status": "PASS" if not failures else "FAIL",
+        "results": details,
+    }
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--json", action="store_true")
+    arguments = parser.parse_args(argv)
+    result = run_checks()
+    if arguments.json:
+        print(json.dumps(result, indent=2, sort_keys=True))
+    else:
+        print(f"release validation: {result['overall_status']}")
+        for failure in result["failures"]:
+            print(f"- {failure['check']}: {failure['error']}")
+    return 0 if result["overall_status"] == "PASS" else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

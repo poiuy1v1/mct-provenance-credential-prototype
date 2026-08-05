@@ -1,17 +1,17 @@
 {
   "title": "MOF contribution-credential prototype for AI-ready MOF data",
   "upload_type": "software",
-  "description": "Synthetic, non-financial artifact-alignment release with modular JSON Schemas, a UiO-66 worked example, layered validation, an executable notebook, validator and negative tests.",
+  "description": "Unpublished local 0.3.4-alpha candidate. Synthetic, non-financial and non-ranking provenance demonstration with deterministic scoring, notebook execution regression and clean-output validation.",
   "creators": [
     {
       "name": "Wei, Jinnan",
-      "affiliation": "Department of Chemistry, University of Cambridge",
-      "orcid": "0009-0006-5356-0441"
+      "orcid": "0009-0006-5356-0441",
+      "affiliation": "University of Cambridge"
     }
   ],
   "access_right": "open",
   "license": "MIT",
-  "version": "0.3.3-alpha",
+  "version": "0.3.4-alpha",
   "keywords": [
     "MOF",
     "provenance",
@@ -21,10 +21,10 @@
   ],
   "related_identifiers": [
     {
-      "identifier": "https://github.com/poiuy1v1/mct-provenance-credential-prototype",
-      "relation": "isSupplementTo",
-      "scheme": "url"
+      "identifier": "10.5281/zenodo.21643012",
+      "relation": "isNewVersionOf",
+      "scheme": "doi"
     }
   ],
-  "notes": "Release candidate. Prior archived version-specific DOI: 10.5281/zenodo.20324761. Add the v0.3.3-alpha release date and DOI only after GitHub publishes the tag and Zenodo completes archival."
+  "notes": "Local candidate only. It has not been pushed, tagged, released or archived. No candidate DOI or release date has been assigned. The related DOI identifies the historical v0.3.3-alpha release only."
 }
