@@ -50,7 +50,7 @@ class ReleaseSchemaAndPolicyTests(unittest.TestCase):
                 event["validation"]["verifier"]["identifier"],
             )
 
-    def test_candidate_metadata_has_no_new_doi_or_release_date(self):
+    def test_release_metadata_has_no_prefilled_doi_or_date(self):
         citation = (ROOT / "CITATION.cff").read_text(encoding="utf-8")
         self.assertIn('version: "0.3.4-alpha"', citation)
         self.assertNotRegex(citation, re.compile(r"(?m)^doi:"))
@@ -59,6 +59,24 @@ class ReleaseSchemaAndPolicyTests(unittest.TestCase):
         self.assertEqual(zenodo["version"], "0.3.4-alpha")
         self.assertNotIn("doi", zenodo)
         self.assertNotIn("publication_date", zenodo)
+
+    def test_release_facing_metadata_has_no_candidate_language(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        notes = (ROOT / "RELEASE_NOTES_v0.3.4-alpha.md").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn(
+            "Current software version: **`v0.3.4-alpha`**.",
+            readme,
+        )
+        self.assertTrue(notes.startswith("# v0.3.4-alpha\n"))
+        for marker in (
+            "local unpublished",
+            "has not been pushed, tagged, released, or archived",
+            "Unpublished draft",
+        ):
+            self.assertNotIn(marker, readme)
+            self.assertNotIn(marker, notes)
 
 
 if __name__ == "__main__":

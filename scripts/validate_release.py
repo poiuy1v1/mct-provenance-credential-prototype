@@ -113,31 +113,51 @@ def check_metadata() -> dict[str, Any]:
     citation = (ROOT / "CITATION.cff").read_text(encoding="utf-8")
     zenodo = load_json(".zenodo.json")
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    release_notes = (ROOT / "RELEASE_NOTES_v0.3.4-alpha.md").read_text(
+        encoding="utf-8"
+    )
     require(
         'version: "0.3.4-alpha"' in citation,
-        "CITATION.cff candidate version mismatch",
+        "CITATION.cff version mismatch",
     )
-    require(not re.search(r"(?m)^doi:", citation), "Candidate CFF fabricates a DOI")
+    require(not re.search(r"(?m)^doi:", citation), "CFF fabricates a DOI")
     require(
         not re.search(r"(?m)^date-released:", citation),
-        "Candidate CFF fabricates a release date",
+        "CFF fabricates a release date",
     )
     require(zenodo.get("version") == CANDIDATE_VERSION, "Zenodo version mismatch")
-    require("doi" not in zenodo, "Candidate Zenodo metadata fabricates a DOI")
+    require("doi" not in zenodo, "Zenodo metadata fabricates a DOI")
     require(
         "publication_date" not in zenodo,
-        "Candidate Zenodo metadata fabricates a publication date",
+        "Zenodo metadata fabricates a publication date",
     )
     require(
-        "not been pushed, tagged, released, or archived" in readme,
-        "README lacks unpublished-candidate boundary",
+        "Current software version: **`v0.3.4-alpha`**." in readme,
+        "README lacks release-facing version statement",
+    )
+    stale_markers = (
+        "local unpublished",
+        "has not been pushed, tagged, released, or archived",
+        "Unpublished draft",
+    )
+    require(
+        not any(marker in readme for marker in stale_markers),
+        "README retains stale candidate-state language",
+    )
+    require(
+        release_notes.startswith("# v0.3.4-alpha\n"),
+        "Release notes retain draft heading",
+    )
+    require(
+        not any(marker in release_notes for marker in stale_markers),
+        "Release notes retain stale candidate-state language",
     )
     require(HISTORICAL_DOI in readme, "README omits historical provenance DOI")
     return {
-        "candidate_doi": "ABSENT",
-        "candidate_release_date": "ABSENT",
+        "release_doi": "PENDING_EXTERNAL_ARCHIVE",
+        "release_date": "PENDING_EXTERNAL_RELEASE",
         "historical_v0.3.3_doi": HISTORICAL_DOI,
-        "metadata_boundary": "PASS",
+        "metadata_state": "RELEASE_FACING_PREPUBLICATION",
     }
 
 
