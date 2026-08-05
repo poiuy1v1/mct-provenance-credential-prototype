@@ -4,10 +4,10 @@
   "overall_status": "PASS",
   "results": {
     "metadata": {
-      "candidate_doi": "ABSENT",
-      "candidate_release_date": "ABSENT",
       "historical_v0.3.3_doi": "10.5281/zenodo.21643012",
-      "metadata_boundary": "PASS"
+      "metadata_state": "RELEASE_FACING_PREPUBLICATION",
+      "release_date": "PENDING_EXTERNAL_RELEASE",
+      "release_doi": "PENDING_EXTERNAL_ARCHIVE"
     },
     "mof_profile": {
       "mof_profile": "PASS",
