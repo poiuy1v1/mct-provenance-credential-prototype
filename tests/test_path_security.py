@@ -1,9 +1,17 @@
 import json
+import sys
 import tempfile
 import unittest
 from pathlib import Path
 
 import mct_reward_simulation as scoring
+
+
+SCRIPTS_ROOT = Path(__file__).parents[1] / "scripts"
+if str(SCRIPTS_ROOT) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS_ROOT))
+
+from run_smoke_tests import scan_tree
 
 
 class PortableInputPathTests(unittest.TestCase):
@@ -81,6 +89,90 @@ class PortableInputPathTests(unittest.TestCase):
 
     def test_rooted_windows_path_is_rejected(self):
         self.assert_rejected(r"\private\example_contributions.json")
+
+
+class SmokeScanTreeTests(unittest.TestCase):
+    def write_file(self, root: Path, relative: str, content: str) -> None:
+        path = root / Path(relative)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(content, encoding="utf-8")
+
+    def test_git_object_directory_is_ignored(self):
+        with tempfile.TemporaryDirectory(prefix="paper1-scan-tree-") as temporary:
+            root = Path(temporary) / "candidate"
+            root.mkdir()
+            self.write_file(root, "normal.txt", "ordinary candidate content\n")
+            self.write_file(
+                root,
+                ".git/objects/aa/object-file",
+                "/" + "home/runner/private/file\n",
+            )
+
+            self.assertEqual(scan_tree(root)["private_path_scan"], "PASS")
+
+    def test_root_git_file_is_ignored(self):
+        with tempfile.TemporaryDirectory(prefix="paper1-scan-tree-") as temporary:
+            root = Path(temporary) / "candidate"
+            root.mkdir()
+            self.write_file(
+                root,
+                ".git",
+                "gitdir: " + "C" + ":" + "/" + "Users/example/private/worktree.git\n",
+            )
+
+            self.assertEqual(scan_tree(root)["private_path_scan"], "PASS")
+
+    def test_real_source_private_path_still_fails(self):
+        with tempfile.TemporaryDirectory(prefix="paper1-scan-tree-") as temporary:
+            root = Path(temporary) / "candidate"
+            root.mkdir()
+            self.write_file(
+                root,
+                "docs/bad.txt",
+                "/" + "home/example/private/data.json\n",
+            )
+
+            with self.assertRaisesRegex(RuntimeError, "Private absolute path present"):
+                scan_tree(root)
+
+    def test_real_source_windows_private_path_still_fails(self):
+        with tempfile.TemporaryDirectory(prefix="paper1-scan-tree-") as temporary:
+            root = Path(temporary) / "candidate"
+            root.mkdir()
+            self.write_file(
+                root,
+                "docs/bad.txt",
+                "C" + ":" + "/" + "Users/example/private/data.json\n",
+            )
+
+            with self.assertRaisesRegex(RuntimeError, "Private absolute path present"):
+                scan_tree(root)
+
+    def test_real_source_secret_pattern_still_fails(self):
+        with tempfile.TemporaryDirectory(prefix="paper1-scan-tree-") as temporary:
+            root = Path(temporary) / "candidate"
+            root.mkdir()
+            self.write_file(root, "docs/bad.txt", "ghp_" + "A" * 20 + "\n")
+
+            with self.assertRaisesRegex(RuntimeError, "Credential-like secret present"):
+                scan_tree(root)
+
+    def test_normal_source_tree_still_passes(self):
+        with tempfile.TemporaryDirectory(prefix="paper1-scan-tree-") as temporary:
+            root = Path(temporary) / "candidate"
+            root.mkdir()
+            self.write_file(root, "docs/readme.txt", "ordinary candidate content\n")
+            self.write_file(root, "data/example.json", "{\"ok\": true}\n")
+
+            self.assertEqual(
+                scan_tree(root),
+                {
+                    "cache_scan": "PASS",
+                    "private_path_scan": "PASS",
+                    "secret_scan": "PASS",
+                    "stale_vocabulary_scan": "PASS",
+                },
+            )
 
 
 if __name__ == "__main__":

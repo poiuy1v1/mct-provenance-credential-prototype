@@ -91,6 +91,11 @@ def output_hashes(directory: Path) -> dict[str, str]:
     return {name: sha256(directory / name) for name in OUTPUT_ALLOWLIST}
 
 
+def is_git_metadata_path(path: Path, root: Path) -> bool:
+    relative = path.relative_to(root)
+    return ".git" in relative.parts
+
+
 def scan_tree(
     root: Path, allowed_runtime_directories: set[str] | None = None
 ) -> dict[str, str]:
@@ -111,6 +116,8 @@ def scan_tree(
         ".yml",
     }
     for path in sorted(root.rglob("*")):
+        if is_git_metadata_path(path, root):
+            continue
         relative = path.relative_to(root).as_posix()
         if (
             path.is_dir()
