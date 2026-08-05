@@ -46,9 +46,16 @@ def validate_relative_path(value: str) -> str:
     return value
 
 
+def is_git_metadata_path(path: Path, root: Path) -> bool:
+    relative = path.relative_to(root)
+    return ".git" in relative.parts
+
+
 def inventory(root: Path) -> dict[str, Path]:
     files: dict[str, Path] = {}
     for path in sorted(root.rglob("*")):
+        if is_git_metadata_path(path, root):
+            continue
         relative = path.relative_to(root).as_posix()
         if path.is_symlink():
             raise ValueError(f"Symlink must not be packaged: {relative}")
