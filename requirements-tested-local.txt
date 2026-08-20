@@ -1,4 +1,4 @@
-# Exact direct packages used for the v235.1 Windows strict smoke.
+# Exact direct packages for the v0.3.5-alpha local-candidate Windows acceptance environment.
 # Python interpreter: CPython 3.14.4; transitive dependencies are installed by pip.
 jsonschema==4.26.0
 nbclient==0.10.2

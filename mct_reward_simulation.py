@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Synthetic diagnostic contribution scoring for the v0.3.4-alpha candidate.
+"""Synthetic diagnostic contribution scoring for the v0.3.5-alpha candidate.
 
-The constants and multiplicative score equation are inherited from the frozen
-v0.3.3-alpha implementation.  This candidate adds a documented canonical event
-order so that duplicate penalties and serialized rows do not depend on JSON
-list order.
+The constants, multiplicative score equation, canonical event ordering, and
+diagnostic labels are retained unchanged from the frozen v0.3.4-alpha
+execution baseline. The v0.3.5 semantic restoration adds only non-scoring
+provenance fields.
 """
 
 from __future__ import annotations
@@ -20,7 +20,7 @@ from collections import Counter, defaultdict
 from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Any, Iterable
 
-__version__ = "0.3.4-alpha"
+__version__ = "0.3.5-alpha"
 
 BASE_WEIGHTS = {
     "mof_dataset_deposition": 10.0,

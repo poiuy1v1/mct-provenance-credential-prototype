@@ -1,27 +1,90 @@
 {
   "$schema": "mof_research_object_profile.schema.json",
-  "profile_version": "0.3.4-alpha",
+  "profile_version": "0.3.5-alpha",
   "synthetic_example": true,
   "material_identity": {
     "framework_family": "UiO-66",
-    "display_name": "Synthetic UiO-66 worked example"
+    "display_name": "Synthetic UiO-66 worked example",
+    "structure_identifier": {
+      "identifier_type": "local_synthetic_identifier",
+      "value": "SYN-UIO66-001"
+    }
   },
   "sample_identity": {
     "sample_id": "SYN-SAMPLE-001",
     "batch_id": "SYN-BATCH-A",
     "specimen_id": "SYN-SPECIMEN-PXRD-01"
   },
+  "synthesis_lineage": {
+    "metal_precursor": "zirconium(IV) chloride (illustrative)",
+    "linker": "benzene-1,4-dicarboxylic acid (illustrative)",
+    "modulators": [
+      "hydrochloric acid (illustrative)"
+    ],
+    "solvents": [
+      "N,N-dimethylformamide (illustrative)"
+    ],
+    "reaction_temperature_C": 120,
+    "reaction_duration_h": 24,
+    "workup": [
+      "illustrative solvent washing",
+      "illustrative ambient drying"
+    ],
+    "activation": {
+      "method": "illustrative vacuum activation",
+      "temperature_C": 120,
+      "duration_h": 12
+    }
+  },
+  "characterisation_evidence": [
+    {
+      "technique": "PXRD",
+      "claim": "Illustrative pattern is attached to demonstrate evidence anchoring only; it is not experimental proof of phase identity.",
+      "file": "evidence/example_pxrd_pattern.xy",
+      "sha256": "4d294c21fecb1edad007c1bf093cf43fa8433b80bd19f24af632d6ae7a20310a",
+      "file_status": "evidence_file_present",
+      "integrity_status": "file_integrity_confirmed",
+      "source_link_status": "source_link_recorded"
+    },
+    {
+      "technique": "synthesis_log",
+      "claim": "Illustrative synthesis metadata are recorded in a separate text file.",
+      "file": "evidence/example_synthesis_log.txt",
+      "sha256": "a3b3a3b70028991330c3822ef041c311306a8c0c8c21cf271ddc54ca0d13f194",
+      "file_status": "evidence_file_present",
+      "integrity_status": "file_integrity_confirmed",
+      "source_link_status": "source_link_recorded"
+    }
+  ],
+  "source_anchoring": {
+    "repository_url": "https://github.com/poiuy1v1/mct-provenance-credential-prototype",
+    "record_locator": "MOF_WorkedExample/synthetic_uio66_research_object.json",
+    "license": "CC0-1.0 synthetic metadata example",
+    "created_utc": "2026-07-13T12:00:00Z"
+  },
   "validation": {
     "metadata_status": "metadata_validated",
+    "contributor_id": "did:example:contributor-001",
+    "verifier_id": "did:example:verifier-001",
+    "independent_verifier": true,
+    "decision_date": "2026-07-13",
+    "decision_notes": "Contributor and verifier identifiers are distinct under the project policy for this synthetic independently-verified example. File presence and SHA-256 integrity are checked offline. The repository link is recorded but not network-resolved; scientific review is not claimed.",
+    "credential_status": "draft",
     "evidence_file_status": "evidence_file_present",
     "file_integrity_status": "file_integrity_confirmed",
     "source_link_status": "source_link_recorded",
     "scientific_assessment": {
-      "status": "not_reviewed"
+      "status": "not_reviewed",
+      "notes": "No domain-expert scientific review is claimed for this synthetic example."
+    },
+    "conflict_declaration": {
+      "declared": false,
+      "details": "No known conflict is declared for this synthetic example."
     }
   },
   "reported_outcome": {
     "state": "reported_success",
-    "description": "Synthetic label only."
+    "source": "synthetic_synthesis_record",
+    "description": "Synthetic reported-outcome label used only to demonstrate a machine-readable field; no experimental result or scientific assessment is claimed."
   }
 }

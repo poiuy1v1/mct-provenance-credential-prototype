@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Any
 
 EXPECTED_OUTPUTS = [
-    {"event_count": 6, "schema_version": "0.3.4-alpha"},
+    {"event_count": 6, "schema_version": "0.3.5-alpha"},
     {"diagnostic_score_sum": 23.0324, "row_count": 6},
     {
         "observed_validation_states": {

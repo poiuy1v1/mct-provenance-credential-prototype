@@ -15,5 +15,5 @@
   "input_file": "data/example_contributions.json",
   "num_events": 6,
   "prototype_scope": "synthetic diagnostic contribution scoring; not a researcher-ranking metric",
-  "prototype_version": "0.3.4-alpha"
+  "prototype_version": "0.3.5-alpha"
 }
