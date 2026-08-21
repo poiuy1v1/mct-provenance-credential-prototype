@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.3.5-alpha - Local implementation candidate
+## v0.3.5-alpha
 
 - Restored generic/MOF `research_object` composition within the retained
   top-level contribution-array API, including the portable relative MOF-profile
@@ -16,7 +16,7 @@
   default half-life and the executable diagnostic total `23.0324`.
 - Retained the v0.3.4 real-`nbclient`, deterministic clean-output, portable-path,
   manifest/checksum and Ubuntu/Windows workflow configuration.
-- Prepared candidate metadata with `10.5281/zenodo.21826427` only as the
+- Prepared versioned source metadata with `10.5281/zenodo.21826427` only as the
   historical previous-version relation; no v0.3.5 DOI or date is predeclared.
 - Kept the software synthetic, non-financial, non-transferable, non-ranking and
   outside scientific-validation scope; no MPIF or universal-standard claim is
@@ -39,4 +39,4 @@
 
 - Historical release archived as DOI `10.5281/zenodo.21643012`.
 - Its score and notebook-snapshot defects are retained as historical provenance
-  and are not rewritten by this candidate.
+  and are not rewritten by `v0.3.5-alpha`.

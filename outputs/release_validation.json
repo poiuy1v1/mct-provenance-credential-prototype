@@ -4,11 +4,11 @@
   "overall_status": "PASS",
   "results": {
     "metadata": {
-      "candidate_stage": "LOCAL_ONLY",
-      "current_version_doi": "NOT_ASSIGNED",
-      "current_version_release_date": "NOT_ASSIGNED",
-      "metadata_state": "LOCAL_CANDIDATE_ONLY",
-      "previous_version_doi": "10.5281/zenodo.21826427"
+      "current_version_doi": "NOT_EMBEDDED_IN_SOURCE_METADATA",
+      "current_version_release_date": "NOT_EMBEDDED_IN_SOURCE_METADATA",
+      "metadata_state": "VERSIONED_SOURCE_METADATA",
+      "previous_version_doi": "10.5281/zenodo.21826427",
+      "release_stage": "VERSIONED_SOURCE"
     },
     "mof_profile": {
       "mof_profile": "PASS",
@@ -92,7 +92,7 @@
       "stale_validation_vocabulary": "ABSENT"
     },
     "workflow": {
-      "remote_ci_executed": false,
+      "remote_ci_execution_claim": "EXTERNAL_TO_PACKAGE",
       "ubuntu_configuration": "PRESENT",
       "windows_configuration": "PRESENT"
     }

@@ -1,6 +1,6 @@
 # Reproducibility guide
 
-## Local-candidate acceptance route
+## Acceptance route
 
 Use Python 3.11 or newer from a clean environment:
 
@@ -10,13 +10,13 @@ python MOF_WorkedExample/validate_mof_worked_example.py
 python scripts/run_smoke_tests.py --notebook-backend nbclient
 ```
 
-The exact candidate CI requirements are pinned in `requirements-ci.txt`.
+The exact acceptance requirements are pinned in `requirements-ci.txt`.
 `requirements.txt` separately records supported direct-dependency ranges. The
 bounded Windows environment recorded in `requirements-tested-local.txt` uses
 CPython 3.14.4 with pinned `jsonschema`, `nbclient`, `nbformat` and `ipykernel`
 direct dependencies. The repository retains its Ubuntu/Windows workflow
-configuration, but no local POSIX run or GitHub Actions cloud PASS is claimed
-for this `v0.3.5-alpha` local candidate.
+configuration. Live remote CI execution status is external evidence and is
+neither queried nor asserted by the offline package validator.
 
 ## Restored schema and worked-example checks
 
@@ -75,13 +75,14 @@ python scripts/execute_notebook.py verification_workflow_demo.ipynb generated/ve
 ```
 
 The fallback backend is diagnostic only and cannot create the committed
-snapshot or satisfy release acceptance. No cloud GitHub Actions execution is
-claimed by this local candidate.
+snapshot or satisfy release acceptance. Live GitHub Actions execution remains
+external to this offline acceptance route.
 
-## Candidate boundary
+## Release and scientific boundary
 
 The profile is a thin synthetic MOF research-object adapter, not a universal
 MOF reporting standard. No MPIF compatibility, compliance or conformance is
-claimed. Successful local acceptance can authorise only independent
-`v0.3.5-alpha` software audit; it does not authorise a remote push, pull request,
-tag, release, Zenodo action, DOI/date insertion or manuscript change.
+claimed. Successful acceptance establishes only the technical properties
+checked by this offline route. It does not claim live branch, pull-request, CI,
+tag, release or archive state and cannot supply human merge, release, DOI/date
+insertion or manuscript authorization.

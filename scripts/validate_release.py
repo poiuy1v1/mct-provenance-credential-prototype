@@ -24,6 +24,14 @@ PREVIOUS_VERSION_DOI = "10.5281/zenodo.21826427"
 HISTORICAL_V033_DOI = "10.5281/zenodo.21643012"
 CANONICAL_EVENT_IDS = [f"MCT-EVT-{index:04d}" for index in range(1, 7)]
 STALE_VOCABULARY = {"NOT_ESTABLISHED" + "_BY_FROZEN_SNAPSHOT"}
+STAGE_STALE_PUBLIC_MARKERS = (
+    "Current local " + "candidate version",
+    "local implementation " + "candidate only",
+    "LOCAL_" + "CANDIDATE_ONLY",
+    "candidate_" + "stage",
+    "remote_ci_" + "executed",
+    "unrun cross-platform CI " + "configuration",
+)
 
 
 def load_json(relative_path: str | Path) -> Any:
@@ -306,8 +314,8 @@ def check_metadata() -> dict[str, Any]:
         "Zenodo previous-version relation mismatch",
     )
     require(
-        "Current local candidate version: **`v0.3.5-alpha`**." in readme,
-        "README lacks the local-candidate version statement",
+        "Current version: **`v0.3.5-alpha`**." in readme,
+        "README lacks the versioned-source statement",
     )
     require(
         release_notes.startswith("# v0.3.5-alpha"),
@@ -316,12 +324,19 @@ def check_metadata() -> dict[str, Any]:
     combined = "\n".join(
         [readme, reproducibility, changelog, release_notes, json.dumps(zenodo)]
     )
-    lower = combined.lower()
+    lower = " ".join(combined.lower().split())
     require(
         "restoration" in lower and "v0.3.4" in lower,
         "Restoration/integration history is unclear",
     )
-    require("local candidate" in lower, "Candidate-stage boundary is absent")
+    require(
+        "source metadata does not embed" in lower,
+        "Durable source-metadata DOI/date boundary is absent",
+    )
+    require(
+        "live remote ci execution status is external evidence" in lower,
+        "External live-CI evidence boundary is absent",
+    )
     require(
         "thin synthetic mof research-object adapter" in lower,
         "Safe MOF positioning is absent",
@@ -331,13 +346,20 @@ def check_metadata() -> dict[str, Any]:
     observed_dois = _zenodo_dois(combined + "\n" + citation)
     require(
         observed_dois <= {PREVIOUS_VERSION_DOI, HISTORICAL_V033_DOI},
-        "An unissued v0.3.5 Zenodo DOI appears in candidate metadata",
+        "An unissued v0.3.5 Zenodo DOI appears in source metadata",
+    )
+    stage_stale_matches = [
+        marker for marker in STAGE_STALE_PUBLIC_MARKERS if marker.lower() in lower
+    ]
+    require(
+        not stage_stale_matches,
+        "Stage-stale public assertions remain: " + ", ".join(stage_stale_matches),
     )
     return {
-        "candidate_stage": "LOCAL_ONLY",
-        "current_version_doi": "NOT_ASSIGNED",
-        "current_version_release_date": "NOT_ASSIGNED",
-        "metadata_state": "LOCAL_CANDIDATE_ONLY",
+        "release_stage": "VERSIONED_SOURCE",
+        "current_version_doi": "NOT_EMBEDDED_IN_SOURCE_METADATA",
+        "current_version_release_date": "NOT_EMBEDDED_IN_SOURCE_METADATA",
+        "metadata_state": "VERSIONED_SOURCE_METADATA",
         "previous_version_doi": PREVIOUS_VERSION_DOI,
     }
 
@@ -351,7 +373,7 @@ def check_workflow() -> dict[str, Any]:
         "CI no longer invokes the authoritative smoke workflow",
     )
     return {
-        "remote_ci_executed": False,
+        "remote_ci_execution_claim": "EXTERNAL_TO_PACKAGE",
         "ubuntu_configuration": "PRESENT",
         "windows_configuration": "PRESENT",
     }

@@ -1,17 +1,17 @@
 # MOF contribution-credential prototype for AI-ready MOF data
 
-Current local candidate version: **`v0.3.5-alpha`**. This is a local
-implementation candidate only.
+Current version: **`v0.3.5-alpha`**.
 
-This candidate restores the useful semantic/schema layer represented in the
+This version restores the useful semantic/schema layer represented in the
 historical `v0.3.3-alpha` software and integrates it with the hardened execution
 and reproducibility baseline of the historical `v0.3.4-alpha` release. It is
 not a rollback or a new scoring design.
 
 The historical `v0.3.4-alpha` release is archived as
-`10.5281/zenodo.21826427`. In candidate metadata that DOI appears only as the
-previous-version (`isNewVersionOf`) relation. No version-specific
-`v0.3.5-alpha` DOI or publication date has been assigned.
+`10.5281/zenodo.21826427`. In source metadata that DOI appears only as the
+previous-version (`isNewVersionOf`) relation. The source metadata does not
+embed a version-specific `v0.3.5-alpha` DOI or publication date; those values
+are assigned externally by the archive/publication process.
 
 ## What v0.3.5-alpha restores and retains
 
@@ -36,7 +36,7 @@ previous-version (`isNewVersionOf`) relation. No version-specific
   validation from the v0.3.4 execution baseline.
 
 The value `26.2855` found in an earlier supporting-information draft is not
-produced by this candidate. The executable six-event diagnostic sum remains
+produced by this version. The executable six-event diagnostic sum remains
 `23.0324`.
 
 ## Local validation
@@ -49,7 +49,7 @@ python MOF_WorkedExample/validate_mof_worked_example.py
 python scripts/run_smoke_tests.py --notebook-backend nbclient
 ```
 
-The smoke driver copies the candidate tree to two clean temporary roots,
+The smoke driver copies the source tree to two clean temporary roots,
 removes and regenerates the allow-listed outputs, executes the source notebook,
 runs schema, worked-example, policy, unit, negative and snapshot checks, and
 compares the two generated runs. The committed executed notebook is accepted
@@ -57,8 +57,9 @@ only when generated through the `nbclient` backend. A standard-library
 execution route may be used for offline diagnosis but is not acceptance
 evidence.
 
-The repository retains Windows and Ubuntu workflow configuration, but no remote
-CI result is claimed for this local candidate.
+The repository retains Windows and Ubuntu workflow configuration. Live remote
+CI execution status is external evidence: the offline package validator neither
+queries nor asserts it.
 
 ## Scope and validation boundary
 
@@ -77,9 +78,10 @@ event scores are not prices, token balances, hiring or grant metrics, authorship
 criteria, governance entitlements, or researcher rankings. A blockchain is not
 required.
 
-## Candidate status
+## Source and lifecycle boundary
 
-This tree is prepared only for local implementation and independent software
-audit. No remote branch, pull request, tag, GitHub Release, GitHub Actions run,
-Zenodo archive, DOI backfill, manuscript change or publication action is
-authorised by this candidate.
+This versioned source tree is stage-neutral: it does not encode whether a live
+branch, pull request, GitHub Actions run, tag, release or archive currently
+exists. Those lifecycle facts are external evidence. Offline validation of the
+source does not itself supply human merge, release, archive, manuscript or
+publication authorization.

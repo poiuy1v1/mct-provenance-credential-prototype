@@ -11,6 +11,7 @@ from scripts.validate_release import (
     CANDIDATE_VERSION,
     build_contribution_validator,
     check_metadata,
+    check_workflow,
     load_json,
     validate_event_policy,
 )
@@ -116,9 +117,22 @@ class ReleaseSchemaAndPolicyTests(unittest.TestCase):
             )
         )
 
-    def test_release_metadata_is_local_candidate_without_invented_doi_or_date(self):
+    def test_versioned_source_metadata_does_not_embed_current_doi_or_date(self):
         result = check_metadata()
-        self.assertEqual(result["metadata_state"], "LOCAL_CANDIDATE_ONLY")
+        self.assertEqual(result["release_stage"], "VERSIONED_SOURCE")
+        self.assertEqual(result["metadata_state"], "VERSIONED_SOURCE_METADATA")
+        self.assertEqual(
+            result["current_version_doi"],
+            "NOT_EMBEDDED_IN_SOURCE_METADATA",
+        )
+        self.assertEqual(
+            result["current_version_release_date"],
+            "NOT_EMBEDDED_IN_SOURCE_METADATA",
+        )
+        self.assertEqual(
+            result["previous_version_doi"],
+            "10.5281/zenodo.21826427",
+        )
         citation = (ROOT / "CITATION.cff").read_text(encoding="utf-8")
         self.assertIn('version: "0.3.5-alpha"', citation)
         self.assertNotRegex(citation, re.compile(r"(?m)^doi:"))
@@ -127,6 +141,24 @@ class ReleaseSchemaAndPolicyTests(unittest.TestCase):
         self.assertEqual(zenodo["version"], "0.3.5-alpha")
         self.assertNotIn("doi", zenodo)
         self.assertNotIn("publication_date", zenodo)
+        self.assertEqual(
+            zenodo["related_identifiers"],
+            [
+                {
+                    "identifier": "10.5281/zenodo.21826427",
+                    "relation": "isNewVersionOf",
+                    "scheme": "doi",
+                }
+            ],
+        )
+
+    def test_remote_ci_execution_is_external_to_offline_validation(self):
+        result = check_workflow()
+        self.assertEqual(
+            result["remote_ci_execution_claim"],
+            "EXTERNAL_TO_PACKAGE",
+        )
+        self.assertNotIn("remote_ci_" + "executed", result)
 
 
 if __name__ == "__main__":
