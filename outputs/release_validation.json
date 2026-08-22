@@ -1,35 +1,100 @@
 {
-  "candidate_version": "0.3.4-alpha",
+  "candidate_version": "0.3.5-alpha",
   "failures": [],
   "overall_status": "PASS",
   "results": {
     "metadata": {
-      "historical_v0.3.3_doi": "10.5281/zenodo.21643012",
-      "metadata_state": "RELEASE_FACING_PREPUBLICATION",
-      "release_date": "PENDING_EXTERNAL_RELEASE",
-      "release_doi": "PENDING_EXTERNAL_ARCHIVE"
+      "current_version_doi": "NOT_EMBEDDED_IN_SOURCE_METADATA",
+      "current_version_release_date": "NOT_EMBEDDED_IN_SOURCE_METADATA",
+      "metadata_state": "VERSIONED_SOURCE_METADATA",
+      "previous_version_doi": "10.5281/zenodo.21826427",
+      "release_stage": "VERSIONED_SOURCE"
     },
     "mof_profile": {
       "mof_profile": "PASS",
+      "policy": {
+        "conflict": "PASS",
+        "evidence_files": "PASS",
+        "hashes": "PASS",
+        "identity_project_policy": "PASS",
+        "schema": "PASS",
+        "scientific_boundary": "PASS",
+        "source_link_offline_policy": "PASS"
+      },
       "synthetic_evidence_files": [
-        "example_pxrd_pattern.xy",
-        "example_synthesis_log.txt"
+        "evidence/example_pxrd_pattern.xy",
+        "evidence/example_synthesis_log.txt"
       ]
     },
     "schema_and_events": {
-      "candidate_version": "0.3.4-alpha",
+      "candidate_version": "0.3.5-alpha",
+      "canonical_event_ids": [
+        "MCT-EVT-0001",
+        "MCT-EVT-0002",
+        "MCT-EVT-0003",
+        "MCT-EVT-0004",
+        "MCT-EVT-0005",
+        "MCT-EVT-0006"
+      ],
       "contribution_events": 6,
+      "generic_branch": "PASS",
+      "inline_standalone_profile_identity": "PASS",
+      "mof_branch_relative_ref": "PASS",
       "non_transferable_boundary": "PASS",
+      "offline_event_policy": [
+        {
+          "evidence_hashes_checked": 2,
+          "file_integrity_is_scientific_review": false,
+          "scientific_assessment_status": "not_reviewed",
+          "source_resolution_performed": false
+        },
+        {
+          "evidence_hashes_checked": 0,
+          "file_integrity_is_scientific_review": false,
+          "scientific_assessment_status": "not_reviewed",
+          "source_resolution_performed": false
+        },
+        {
+          "evidence_hashes_checked": 0,
+          "file_integrity_is_scientific_review": false,
+          "scientific_assessment_status": "not_reviewed",
+          "source_resolution_performed": false
+        },
+        {
+          "evidence_hashes_checked": 0,
+          "file_integrity_is_scientific_review": false,
+          "scientific_assessment_status": "not_reviewed",
+          "source_resolution_performed": false
+        },
+        {
+          "evidence_hashes_checked": 0,
+          "file_integrity_is_scientific_review": false,
+          "scientific_assessment_status": "not_reviewed",
+          "source_resolution_performed": false
+        },
+        {
+          "evidence_hashes_checked": 0,
+          "file_integrity_is_scientific_review": false,
+          "scientific_assessment_status": "not_reviewed",
+          "source_resolution_performed": false
+        }
+      ],
       "scientific_assessment_boundary": "PASS",
-      "self_verification_rejection": "PASS"
+      "top_level_array_api": "PASS"
     },
     "score": {
       "authoritative_diagnostic_score": 23.0324,
       "diagnostic_rows": 6,
-      "ranking_output": "ABSENT"
+      "ranking_output": "ABSENT",
+      "scoring_version": "0.3.5-alpha"
     },
     "stale_vocabulary": {
       "stale_validation_vocabulary": "ABSENT"
+    },
+    "workflow": {
+      "remote_ci_execution_claim": "EXTERNAL_TO_PACKAGE",
+      "ubuntu_configuration": "PRESENT",
+      "windows_configuration": "PRESENT"
     }
   }
 }

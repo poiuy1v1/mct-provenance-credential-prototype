@@ -1,8 +1,8 @@
 cff-version: 1.2.0
-message: "If you use this software, cite the corresponding archived software release."
+message: "If you use this software, cite the archived release corresponding to the version you use."
 title: "MOF contribution-credential prototype for AI-ready MOF data"
 type: software
-version: "0.3.4-alpha"
+version: "0.3.5-alpha"
 authors:
   - family-names: "Wei"
     given-names: "Jinnan"
@@ -10,4 +10,4 @@ authors:
     orcid: "https://orcid.org/0009-0006-5356-0441"
 license: "MIT"
 repository-code: "https://github.com/poiuy1v1/mct-provenance-credential-prototype"
-abstract: "Synthetic, non-financial and non-ranking software for provenance and contribution-event validation."
+abstract: "Synthetic, non-financial and non-ranking software integrating evidence-linked research-object semantics with deterministic contribution-event validation."

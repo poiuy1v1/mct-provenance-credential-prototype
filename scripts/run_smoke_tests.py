@@ -15,6 +15,8 @@ import tempfile
 from pathlib import Path
 from typing import Any, Sequence
 
+sys.dont_write_bytecode = True
+
 from generate_outputs import OUTPUT_ALLOWLIST
 
 ROOT = Path(__file__).parents[1].resolve()
@@ -272,7 +274,7 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     arguments = build_parser().parse_args(argv)
     source_scans = scan_tree(ROOT)
-    with tempfile.TemporaryDirectory(prefix="paper1-v034-smoke-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="paper1-v035-smoke-") as temporary:
         temp_root = Path(temporary)
         repo_one = temp_root / "run-one" / "candidate"
         repo_two = temp_root / "run-two" / "candidate"
@@ -284,7 +286,7 @@ def main(argv: list[str] | None = None) -> int:
             raise RuntimeError("Clean-directory reruns produced different artifacts")
 
     result = {
-        "candidate_version": "0.3.4-alpha",
+        "candidate_version": "0.3.5-alpha",
         "clean_directory_runs": 2,
         "generated_hashes": first["generated_hashes"],
         "notebook_backend": arguments.notebook_backend,
