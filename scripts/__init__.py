@@ -1,1 +1,1 @@
-"""Cross-platform validation helpers for the v0.3.5-alpha versioned source."""
+"""Cross-platform validation helpers for the v0.3.6-alpha versioned source."""

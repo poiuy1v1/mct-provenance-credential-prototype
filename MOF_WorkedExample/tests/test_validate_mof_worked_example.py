@@ -166,19 +166,19 @@ class WorkedExampleTests(unittest.TestCase):
 
     def test_stale_profile_version_rejected(self):
         instance = copy.deepcopy(self.instance)
-        instance["profile_version"] = "0.3.4-alpha"
+        instance["profile_version"] = "0.3.5-alpha"
         with self.assertRaises(ValidationError):
             validate_instance(instance, ROOT)
 
     def test_stale_profile_schema_vocabulary_rejected(self):
         instance = copy.deepcopy(self.instance)
-        instance["$schema"] = "mof_research_object_profile-v0.3.4-alpha.schema.json"
+        instance["$schema"] = "mof_research_object_profile-v0.3.5-alpha.schema.json"
         with self.assertRaises(ValidationError):
             validate_instance(instance, ROOT)
 
     def test_stale_contribution_version_rejected(self):
         event = copy.deepcopy(self.events[1])
-        event["schema_version"] = "0.3.4-alpha"
+        event["schema_version"] = "0.3.5-alpha"
         with self.assertRaises(ValidationError):
             self.contribution_validator.validate([event])
 

@@ -1,7 +1,7 @@
 {
   "title": "MOF contribution-credential prototype for AI-ready MOF data",
   "upload_type": "software",
-  "description": "Synthetic, non-financial and non-ranking provenance demonstration that restores evidence-linked generic and MOF research-object semantics and integrates them with deterministic scoring, real nbclient notebook execution, and clean-output validation.",
+  "description": "Synthetic, non-financial and non-ranking provenance demonstration preserving the v0.3.5 semantic and reproducibility model while removing internal workflow artifacts from the public release tree and adding fail-closed release-neutrality validation.",
   "creators": [
     {
       "name": "Wei, Jinnan",
@@ -11,7 +11,7 @@
   ],
   "access_right": "open",
   "license": "MIT",
-  "version": "0.3.5-alpha",
+  "version": "0.3.6-alpha",
   "keywords": [
     "MOF",
     "provenance",
@@ -21,10 +21,10 @@
   ],
   "related_identifiers": [
     {
-      "identifier": "10.5281/zenodo.21826427",
+      "identifier": "10.5281/zenodo.22062669",
       "relation": "isNewVersionOf",
       "scheme": "doi"
     }
   ],
-  "notes": "This version restores the semantic/schema layer while retaining the hardened v0.3.4-alpha execution baseline. The related identifier points only to the historical v0.3.4-alpha release as the previous version; no v0.3.5-alpha DOI or publication date is predeclared."
+  "notes": "This clean-successor version preserves the v0.3.5-alpha semantic/schema and executable-scoring truth while removing internal conversation/audit artifacts, historicalizing superseded release instructions, and adding fail-closed public-release neutrality checks. The related identifier points only to the historical v0.3.5-alpha release as the previous version; no v0.3.6-alpha DOI or publication date is predeclared."
 }

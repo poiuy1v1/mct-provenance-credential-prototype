@@ -10,6 +10,11 @@ import json
 import re
 from pathlib import Path, PurePosixPath
 
+try:
+    from check_release_neutrality import validate_public_release_tree
+except ModuleNotFoundError:  # imported as scripts.validate_package
+    from scripts.check_release_neutrality import validate_public_release_tree
+
 MANIFEST_NAME = "MANIFEST.csv"
 CHECKSUM_NAME = "CHECKSUMS_SHA256.txt"
 FORBIDDEN_DIRECTORIES = {
@@ -117,6 +122,7 @@ def read_checksums(path: Path) -> dict[str, str]:
 def validate(root: Path) -> dict[str, object]:
     root = root.resolve(strict=True)
     files = inventory(root)
+    neutrality = validate_public_release_tree(root)
     manifest_path = root / MANIFEST_NAME
     checksum_path = root / CHECKSUM_NAME
     if not manifest_path.is_file() or not checksum_path.is_file():
@@ -152,6 +158,7 @@ def validate(root: Path) -> dict[str, object]:
         "checksum_entries": len(checksums),
         "manifest_entries": len(manifest),
         "overall_status": "PASS",
+        "public_release_neutrality": neutrality,
         "symlinks": 0,
     }
 
