@@ -68,7 +68,7 @@ class ReleaseSchemaAndPolicyTests(unittest.TestCase):
 
     def test_stale_event_version_is_rejected(self):
         event = copy.deepcopy(self.events[1])
-        event["schema_version"] = "0.3.4-alpha"
+        event["schema_version"] = "0.3.5-alpha"
         with self.assertRaises(ValidationError):
             self.validator.validate([event])
 
@@ -131,21 +131,21 @@ class ReleaseSchemaAndPolicyTests(unittest.TestCase):
         )
         self.assertEqual(
             result["previous_version_doi"],
-            "10.5281/zenodo.21826427",
+            "10.5281/zenodo.22062669",
         )
         citation = (ROOT / "CITATION.cff").read_text(encoding="utf-8")
-        self.assertIn('version: "0.3.5-alpha"', citation)
+        self.assertIn('version: "0.3.6-alpha"', citation)
         self.assertNotRegex(citation, re.compile(r"(?m)^doi:"))
         self.assertNotRegex(citation, re.compile(r"(?m)^date-released:"))
         zenodo = json.loads((ROOT / ".zenodo.json").read_text(encoding="utf-8"))
-        self.assertEqual(zenodo["version"], "0.3.5-alpha")
+        self.assertEqual(zenodo["version"], "0.3.6-alpha")
         self.assertNotIn("doi", zenodo)
         self.assertNotIn("publication_date", zenodo)
         self.assertEqual(
             zenodo["related_identifiers"],
             [
                 {
-                    "identifier": "10.5281/zenodo.21826427",
+                    "identifier": "10.5281/zenodo.22062669",
                     "relation": "isNewVersionOf",
                     "scheme": "doi",
                 }

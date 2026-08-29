@@ -14,7 +14,7 @@ from jsonschema import Draft202012Validator, FormatChecker
 
 
 ROOT = Path(__file__).resolve().parent
-PROFILE_VERSION = "0.3.5-alpha"
+PROFILE_VERSION = "0.3.6-alpha"
 ID_RE = re.compile(
     r"^(did:[a-z0-9]+:[A-Za-z0-9._:%-]+|"
     r"https://orcid.org/\d{4}-\d{4}-\d{4}-\d{3}[0-9X])$"
@@ -157,7 +157,7 @@ def main() -> int:
     if arguments.json:
         print(json.dumps(result, indent=2, sort_keys=True))
     else:
-        print("PASS: bounded offline v0.3.5-alpha MOF worked-example validation")
+        print("PASS: bounded offline v0.3.6-alpha MOF worked-example validation")
     return 0
 
 

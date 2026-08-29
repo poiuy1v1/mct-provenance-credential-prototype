@@ -1,7 +1,7 @@
 [
   {
     "event_id": "MCT-EVT-0001",
-    "schema_version": "0.3.5-alpha",
+    "schema_version": "0.3.6-alpha",
     "contribution_type": "mof_dataset_deposition",
     "contributor": {
       "display_name": "Synthetic Contributor 1",
@@ -14,7 +14,7 @@
       "repository_url": "https://example.org/1",
       "domain_profile": {
         "$schema": "mof_research_object_profile.schema.json",
-        "profile_version": "0.3.5-alpha",
+        "profile_version": "0.3.6-alpha",
         "synthetic_example": true,
         "material_identity": {
           "framework_family": "UiO-66",
@@ -154,7 +154,7 @@
   },
   {
     "event_id": "MCT-EVT-0002",
-    "schema_version": "0.3.5-alpha",
+    "schema_version": "0.3.6-alpha",
     "contribution_type": "negative_synthesis_record",
     "contributor": {
       "display_name": "Synthetic Contributor 2",
@@ -207,7 +207,7 @@
   },
   {
     "event_id": "MCT-EVT-0003",
-    "schema_version": "0.3.5-alpha",
+    "schema_version": "0.3.6-alpha",
     "contribution_type": "replication_study",
     "contributor": {
       "display_name": "Synthetic Contributor 3",
@@ -260,7 +260,7 @@
   },
   {
     "event_id": "MCT-EVT-0004",
-    "schema_version": "0.3.5-alpha",
+    "schema_version": "0.3.6-alpha",
     "contribution_type": "metadata_curation",
     "contributor": {
       "display_name": "Synthetic Contributor 4",
@@ -313,7 +313,7 @@
   },
   {
     "event_id": "MCT-EVT-0005",
-    "schema_version": "0.3.5-alpha",
+    "schema_version": "0.3.6-alpha",
     "contribution_type": "peer_validation",
     "contributor": {
       "display_name": "Synthetic Contributor 5",
@@ -366,7 +366,7 @@
   },
   {
     "event_id": "MCT-EVT-0006",
-    "schema_version": "0.3.5-alpha",
+    "schema_version": "0.3.6-alpha",
     "contribution_type": "metadata_curation",
     "contributor": {
       "display_name": "Synthetic Contributor 6",

@@ -1,6 +1,6 @@
 {
   "$schema": "mof_research_object_profile.schema.json",
-  "profile_version": "0.3.5-alpha",
+  "profile_version": "0.3.6-alpha",
   "synthetic_example": true,
   "material_identity": {
     "framework_family": "UiO-66",

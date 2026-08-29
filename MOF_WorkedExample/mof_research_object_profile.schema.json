@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "mof_research_object_profile.schema.json",
-  "title": "Synthetic MOF research-object profile - v0.3.5-alpha",
+  "title": "Synthetic MOF research-object profile - v0.3.6-alpha",
   "description": "A thin synthetic MOF research-object adapter that separates metadata validation, evidence-file presence, file integrity, source-link status and scientific assessment. It is not a universal MOF reporting standard, an MPIF compatibility or conformance claim, a secured/conforming W3C Verifiable Credential, or evidence of scientific truth.",
   "type": "object",
   "additionalProperties": false,
@@ -24,7 +24,7 @@
     },
     "profile_version": {
       "type": "string",
-      "const": "0.3.5-alpha"
+      "const": "0.3.6-alpha"
     },
     "synthetic_example": {
       "type": "boolean",

@@ -1,39 +1,52 @@
 # MOF contribution-credential prototype for AI-ready MOF data
 
-Current version: **`v0.3.5-alpha`**.
+Current version: **`v0.3.6-alpha`**.
 
-This version restores the useful semantic/schema layer represented in the
-historical `v0.3.3-alpha` software and integrates it with the hardened execution
-and reproducibility baseline of the historical `v0.3.4-alpha` release. It is
-not a rollback or a new scoring design.
+This clean-successor source preserves the complete semantic/schema and
+reproducibility behaviour of the historical `v0.3.5-alpha` release while
+removing internal workflow/conversation material from the public release tree.
+It is a packaging-neutrality and historical-document clarity update, not a new
+scientific result, scoring design or application-domain expansion.
 
-The historical `v0.3.4-alpha` release is archived as
-`10.5281/zenodo.21826427`. In source metadata that DOI appears only as the
+The historical `v0.3.5-alpha` release is archived as
+`10.5281/zenodo.22062669`. In source metadata that DOI appears only as the
 previous-version (`isNewVersionOf`) relation. The source metadata does not
-embed a version-specific `v0.3.5-alpha` DOI or publication date; those values
+embed a version-specific `v0.3.6-alpha` DOI or publication date; those values
 are assigned externally by the archive/publication process.
 
-## What v0.3.5-alpha restores and retains
+## What v0.3.6-alpha changes
 
-- keeps the top-level contribution API as an array and restores generic/MOF
+- removes the tracked internal Codex conversation/task log from the public
+  source tree;
+- moves the old `v0.3.4-alpha` release-finalization instructions under
+  `history/` with an explicit historical/superseded warning;
+- adds a fail-closed release-neutrality validator and negative tests that reject
+  `audit/` directories, conversation/prompt/transcript filenames, internal
+  review-result filenames and characteristic internal workflow markers;
+- updates release, schema, profile, event and scoring version fields coherently
+  to `0.3.6-alpha`;
+- preserves all scientific, schema and executable behaviour described below.
+
+## Preserved semantic and execution model
+
+- the top-level contribution API remains an array with generic/MOF
   `research_object` branches, internal definitions, and a portable relative
   reference to the MOF profile inside each array item;
-- restores evidence links, metadata hashes, optional local evidence paths and
-  SHA-256 values without making those provenance fields part of scoring;
-- represents metadata, evidence-file, file-integrity, source-link and
-  scientific-assessment states separately;
-- uses the detailed standalone synthetic UiO-66 profile as the first canonical
-  event's inline domain profile, with exact parsed-JSON equality between the
-  two representations;
-- checks local evidence presence and claimed SHA-256 integrity offline, while
-  keeping source-link recording distinct from remote resolution and file
-  integrity distinct from scientific review;
-- retains exactly six canonical events, their identifiers and ordering, the
-  frozen formulas and weights, the default half-life, and the authoritative
-  executable diagnostic total `23.0324`;
-- retains genuine `nbclient` notebook execution, deterministic clean-directory
-  output regression, portable path checks, and package manifest/checksum
-  validation from the v0.3.4 execution baseline.
+- evidence links, metadata hashes, optional local evidence paths and SHA-256
+  values remain non-scoring provenance fields;
+- metadata, evidence-file, file-integrity, source-link and
+  scientific-assessment states remain separate;
+- the detailed standalone synthetic UiO-66 profile remains exactly equal as
+  parsed JSON to the first canonical event's inline domain profile;
+- local evidence presence and claimed SHA-256 integrity are checked offline,
+  while source-link recording remains distinct from remote resolution and file
+  integrity remains distinct from scientific review;
+- exactly six canonical events, their identifiers/order, frozen formulas and
+  weights, default half-life, and executable diagnostic total `23.0324` are
+  retained;
+- genuine `nbclient` execution, deterministic clean-directory output
+  regression, portable-path checks, and package manifest/checksum validation
+  are retained.
 
 The value `26.2855` found in an earlier supporting-information draft is not
 produced by this version. The executable six-event diagnostic sum remains
@@ -46,16 +59,15 @@ Use Python 3.11+ and the exact CI requirements in a clean local environment:
 ```text
 python -m pip install -r requirements-ci.txt
 python MOF_WorkedExample/validate_mof_worked_example.py
+python scripts/check_release_neutrality.py --candidate-root .
 python scripts/run_smoke_tests.py --notebook-backend nbclient
 ```
 
 The smoke driver copies the source tree to two clean temporary roots,
-removes and regenerates the allow-listed outputs, executes the source notebook,
-runs schema, worked-example, policy, unit, negative and snapshot checks, and
-compares the two generated runs. The committed executed notebook is accepted
-only when generated through the `nbclient` backend. A standard-library
-execution route may be used for offline diagnosis but is not acceptance
-evidence.
+regenerates the complete output allow-list, executes the source notebook, runs
+schema, worked-example, package-neutrality, policy, unit, negative and snapshot
+checks, and compares the two generated runs. The committed executed notebook is
+accepted only when generated through the `nbclient` backend.
 
 The repository retains Windows and Ubuntu workflow configuration. Live remote
 CI execution status is external evidence: the offline package validator neither

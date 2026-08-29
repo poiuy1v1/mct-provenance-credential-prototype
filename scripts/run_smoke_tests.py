@@ -32,7 +32,6 @@ STALE_TOKEN = "NOT_ESTABLISHED" + "_BY_FROZEN_SNAPSHOT"
 CACHE_NAMES = {"__pycache__", ".ipynb_checkpoints", ".pytest_cache", ".mypy_cache"}
 FORBIDDEN_PACKAGE_DIRECTORIES = CACHE_NAMES | {".venv", "build", "generated"}
 PRIVATE_PATH_FIXTURE_FILES = {
-    "audit/CODEX_VISIBLE_CONVERSATION_LOG_UTF8.txt",
     "mct_reward_simulation.py",
     "scripts/compare_notebook_semantics.py",
     "scripts/execute_notebook.py",
@@ -274,7 +273,7 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     arguments = build_parser().parse_args(argv)
     source_scans = scan_tree(ROOT)
-    with tempfile.TemporaryDirectory(prefix="paper1-v035-smoke-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="paper1-v036-smoke-") as temporary:
         temp_root = Path(temporary)
         repo_one = temp_root / "run-one" / "candidate"
         repo_two = temp_root / "run-two" / "candidate"
@@ -286,7 +285,7 @@ def main(argv: list[str] | None = None) -> int:
             raise RuntimeError("Clean-directory reruns produced different artifacts")
 
     result = {
-        "candidate_version": "0.3.5-alpha",
+        "candidate_version": "0.3.6-alpha",
         "clean_directory_runs": 2,
         "generated_hashes": first["generated_hashes"],
         "notebook_backend": arguments.notebook_backend,

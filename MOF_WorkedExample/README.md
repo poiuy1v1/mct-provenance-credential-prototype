@@ -1,6 +1,6 @@
 # Synthetic MOF worked example
 
-This directory contains the `v0.3.5-alpha` synthetic UiO-66 worked example:
+This directory contains the `v0.3.6-alpha` synthetic UiO-66 worked example:
 
 - `mof_research_object_profile.schema.json` defines material identity;
   sample/batch/specimen identity; synthesis and activation lineage;

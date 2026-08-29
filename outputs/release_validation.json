@@ -1,5 +1,5 @@
 {
-  "candidate_version": "0.3.5-alpha",
+  "candidate_version": "0.3.6-alpha",
   "failures": [],
   "overall_status": "PASS",
   "results": {
@@ -7,7 +7,7 @@
       "current_version_doi": "NOT_EMBEDDED_IN_SOURCE_METADATA",
       "current_version_release_date": "NOT_EMBEDDED_IN_SOURCE_METADATA",
       "metadata_state": "VERSIONED_SOURCE_METADATA",
-      "previous_version_doi": "10.5281/zenodo.21826427",
+      "previous_version_doi": "10.5281/zenodo.22062669",
       "release_stage": "VERSIONED_SOURCE"
     },
     "mof_profile": {
@@ -26,8 +26,14 @@
         "evidence/example_synthesis_log.txt"
       ]
     },
+    "public_release_neutrality": {
+      "files_scanned": 62,
+      "forbidden_artifacts": 0,
+      "overall_status": "PASS",
+      "text_files_scanned": 59
+    },
     "schema_and_events": {
-      "candidate_version": "0.3.5-alpha",
+      "candidate_version": "0.3.6-alpha",
       "canonical_event_ids": [
         "MCT-EVT-0001",
         "MCT-EVT-0002",
@@ -86,7 +92,7 @@
       "authoritative_diagnostic_score": 23.0324,
       "diagnostic_rows": 6,
       "ranking_output": "ABSENT",
-      "scoring_version": "0.3.5-alpha"
+      "scoring_version": "0.3.6-alpha"
     },
     "stale_vocabulary": {
       "stale_validation_vocabulary": "ABSENT"

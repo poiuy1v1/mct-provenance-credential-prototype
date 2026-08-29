@@ -1,6 +1,18 @@
 # Changelog
 
-## v0.3.5-alpha
+## v0.3.6-alpha - Clean public-artifact successor candidate
+
+- Removed the public internal Codex conversation/task log.
+- Historicalized the superseded v0.3.4 release-finalization instructions.
+- Added fail-closed public-release neutrality validation and negative tests.
+- Updated versioned source metadata to `0.3.6-alpha`, using
+  `10.5281/zenodo.22062669` only as the previous-version relation.
+- Preserved all v0.3.5 schema semantics, evidence bytes, six canonical events,
+  scoring constants, default half-life and diagnostic total `23.0324`.
+- Preserved genuine `nbclient` execution, deterministic regeneration, package
+  integrity, cross-platform path checks and the scientific/non-ranking boundary.
+
+## v0.3.5-alpha - Historical public release
 
 - Restored generic/MOF `research_object` composition within the retained
   top-level contribution-array API, including the portable relative MOF-profile

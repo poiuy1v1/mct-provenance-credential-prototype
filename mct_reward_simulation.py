@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Synthetic diagnostic contribution scoring for the v0.3.5-alpha candidate.
+"""Synthetic diagnostic contribution scoring for the v0.3.6-alpha candidate.
 
 The constants, multiplicative score equation, canonical event ordering, and
 diagnostic labels are retained unchanged from the frozen v0.3.4-alpha
@@ -20,7 +20,7 @@ from collections import Counter, defaultdict
 from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Any, Iterable
 
-__version__ = "0.3.5-alpha"
+__version__ = "0.3.6-alpha"
 
 BASE_WEIGHTS = {
     "mof_dataset_deposition": 10.0,

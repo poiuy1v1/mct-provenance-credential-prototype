@@ -15,12 +15,18 @@ from typing import Any, Callable
 from jsonschema import Draft202012Validator, FormatChecker
 from referencing import Registry, Resource
 
+try:
+    from check_release_neutrality import validate_public_release_tree
+except ModuleNotFoundError:  # imported as scripts.validate_release
+    from scripts.check_release_neutrality import validate_public_release_tree
+
 
 ROOT = Path(__file__).parents[1].resolve()
 MOF_DIR = ROOT / "MOF_WorkedExample"
 MOF_SCHEMA_REF = "MOF_WorkedExample/mof_research_object_profile.schema.json"
-CANDIDATE_VERSION = "0.3.5-alpha"
-PREVIOUS_VERSION_DOI = "10.5281/zenodo.21826427"
+CANDIDATE_VERSION = "0.3.6-alpha"
+PREVIOUS_VERSION_DOI = "10.5281/zenodo.22062669"
+HISTORICAL_V034_DOI = "10.5281/zenodo.21826427"
 HISTORICAL_V033_DOI = "10.5281/zenodo.21643012"
 CANONICAL_EVENT_IDS = [f"MCT-EVT-{index:04d}" for index in range(1, 7)]
 STALE_VOCABULARY = {"NOT_ESTABLISHED" + "_BY_FROZEN_SNAPSHOT"}
@@ -286,11 +292,11 @@ def check_metadata() -> dict[str, Any]:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     reproducibility = (ROOT / "REPRODUCIBILITY.md").read_text(encoding="utf-8")
     changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-    release_notes = (ROOT / "RELEASE_NOTES_v0.3.5-alpha.md").read_text(
+    release_notes = (ROOT / "RELEASE_NOTES_v0.3.6-alpha.md").read_text(
         encoding="utf-8"
     )
 
-    require('version: "0.3.5-alpha"' in citation, "CITATION.cff version mismatch")
+    require('version: "0.3.6-alpha"' in citation, "CITATION.cff version mismatch")
     require(not re.search(r"(?m)^doi:", citation), "CFF fabricates a DOI")
     require(
         not re.search(r"(?m)^date-released:", citation),
@@ -314,20 +320,22 @@ def check_metadata() -> dict[str, Any]:
         "Zenodo previous-version relation mismatch",
     )
     require(
-        "Current version: **`v0.3.5-alpha`**." in readme,
+        "Current version: **`v0.3.6-alpha`**." in readme,
         "README lacks the versioned-source statement",
     )
     require(
-        release_notes.startswith("# v0.3.5-alpha"),
-        "v0.3.5 release notes heading mismatch",
+        release_notes.startswith("# v0.3.6-alpha"),
+        "v0.3.6 release notes heading mismatch",
     )
     combined = "\n".join(
         [readme, reproducibility, changelog, release_notes, json.dumps(zenodo)]
     )
     lower = " ".join(combined.lower().split())
     require(
-        "restoration" in lower and "v0.3.4" in lower,
-        "Restoration/integration history is unclear",
+        "clean-successor" in lower
+        and "v0.3.5" in lower
+        and "v0.3.4" in lower,
+        "Clean-successor and historical-version lineage is unclear",
     )
     require(
         "source metadata does not embed" in lower,
@@ -345,8 +353,8 @@ def check_metadata() -> dict[str, Any]:
     require("not a universal" in lower, "Universal-standard non-claim is absent")
     observed_dois = _zenodo_dois(combined + "\n" + citation)
     require(
-        observed_dois <= {PREVIOUS_VERSION_DOI, HISTORICAL_V033_DOI},
-        "An unissued v0.3.5 Zenodo DOI appears in source metadata",
+        observed_dois <= {PREVIOUS_VERSION_DOI, HISTORICAL_V034_DOI, HISTORICAL_V033_DOI},
+        "An unissued v0.3.6 Zenodo DOI appears in source metadata",
     )
     stage_stale_matches = [
         marker for marker in STAGE_STALE_PUBLIC_MARKERS if marker.lower() in lower
@@ -362,6 +370,10 @@ def check_metadata() -> dict[str, Any]:
         "metadata_state": "VERSIONED_SOURCE_METADATA",
         "previous_version_doi": PREVIOUS_VERSION_DOI,
     }
+
+
+def check_public_release_neutrality() -> dict[str, Any]:
+    return validate_public_release_tree(ROOT)
 
 
 def check_workflow() -> dict[str, Any]:
@@ -412,6 +424,7 @@ def run_checks() -> dict[str, Any]:
         ("mof_profile", check_mof_profile),
         ("score", check_score),
         ("metadata", check_metadata),
+        ("public_release_neutrality", check_public_release_neutrality),
         ("workflow", check_workflow),
         ("stale_vocabulary", check_stale_vocabulary),
     ]
